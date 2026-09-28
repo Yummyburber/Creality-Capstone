@@ -1,14 +1,8 @@
-"""Walmart adapter.
-
+"""
 Approach: Walmart's search page is a Next.js app, so the results are embedded in the
 HTML as JSON inside <script id="__NEXT_DATA__">. We parse that instead of scraping tags.
-
-CAVEATS (verify in your browser's Network/Elements tabs, these can change any time):
-  * Walmart uses aggressive bot protection. You may get a CAPTCHA page instead of results.
-  * The JSON path below (props.pageProps.initialData.searchResult.itemStacks) is my best
-    understanding and may need adjusting.
-  * Prices depend on the selected store. Location is cookie-based; see _apply_location().
 """
+
 import json
 import re
 

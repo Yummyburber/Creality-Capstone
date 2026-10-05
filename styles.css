@@ -22,7 +22,7 @@ display: block;
     display: flex;
     gap: 1rem;
     padding: 0.5rem;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 .nav-links li {
     display: inline;
@@ -73,7 +73,7 @@ display: block;
         padding: 0.25rem;
         padding-top: 30px;
         gap: 0.2rem;
-        flex-wrap: wrap;
+        
     }
     .nav-links {
         display: flex;

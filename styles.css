@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.hero h1 span {
+display: block;
+}
+.navbar {
+    background-color: #333;
+    color: #f0f0f0;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    
+}
+.nav-links li {
+    display: inline;
+    padding: 10px 10px;
+    
+}
+
+    
+
+    
+
+.nav-links li a {
+    color: #cfcccc;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+}
+.nav-links li a:hover {
+    
+    border-bottom: 2px solid #fff;
+    
+    
+}
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.navbar .logo h2{
+    margin: 0;
+    padding: 0;
+}
+.navbar .logo img{
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}

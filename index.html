@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DIY Meal Maker</title>
         <script src="https://unpkg.com/lucide@latest"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Edu+QLD+Hand:wght@400..700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
     </head>
 
@@ -22,16 +25,57 @@
                 <li><a href="Pantry.html"><i data-lucide="can"></i>Pantry</a></li>
                 <li><a href="meal-plan.html"><i data-lucide="cooking-pot"></i>  Meal Plan</a></li>
             </ul>
+            <div class="nav-actions">
+                <a href="#" aria-label = "Profile">Profile </a>
+                <button type="button" aria-label="Toggle light, dark mode"><i data-lucide="sun"></i></button>
+            </div>
         </nav>
        </header>
        <main>
+
         <section class="hero">
             <h1>
                 <span>Cook Something</span>
-                <span>Great Today</span>
+                <span class="title-line"><span class="hero-highlight">Great</span> today</span>
             </h1>
             <p><em>Good food. Less money. Your way.</em></p>
-            <a href="recipes.html" class="btn">Get Started</a>
+            <form class="search-bar">
+                
+            <input type="text" placeholder="Search for recipes...">
+            <button type="submit"><i data-lucide="search"></i></button>
+            </form>
+            
+        </section>
+        <section class="cards-section">
+            <div class="cards-grid">
+    <a class="feature-card" href="recipes.html">
+        <i data-lucide="chef-hat"></i>
+        <h2>Find Recipes</h2>
+        <p>Browse budget-friendly recipes, filtered by your preferences.</p>
+        <i class="card-arrow" data-lucide="arrow-right"></i>
+    </a>
+
+    <a class="feature-card" href="create.html">
+        <i data-lucide="pencil"></i>
+        <h2>Create Your Own</h2>
+        <p>Build a custom recipe, save it, and keep it for later.</p>
+        <i class="card-arrow" data-lucide="arrow-right"></i>
+    </a>
+
+    <a class="feature-card" href="pantry.html">
+        <i data-lucide="shopping-basket"></i>
+        <h2>Get Ingredients</h2>
+        <p>See what you need and where to find it, with estimated prices.</p>
+        <i class="card-arrow" data-lucide="arrow-right"></i>
+    </a>
+
+    <a class="feature-card" href="mealPlan.html">
+        <i data-lucide="circle-dollar-sign"></i>
+        <h2>Stay on Budget</h2>
+        <p>Cook delicious meals without breaking the bank.</p>
+        <i class="card-arrow" data-lucide="arrow-right"></i>
+    </a>
+</div>
         </section>
         </main>
        <footer>

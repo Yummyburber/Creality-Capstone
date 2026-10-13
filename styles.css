@@ -34,13 +34,13 @@ body {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 7rem;
+    gap: 3.5rem;
     
     flex-wrap: wrap;
 }
 
 .nav-links li {
-    padding: 0.25rem 1.25rem;
+    padding: 0.25rem 3.25rem;
 }
 
 .nav-links li a {
@@ -278,10 +278,19 @@ body {
 }
 /* Large monitors: cap the hero height and scale up the hero content */
 @media (min-width: 1921px) {
+    
+    .nav-links {
+    gap: 3.5rem;
+    }
+
+    .nav-links li {
+    padding: 0.25rem 7.25rem;
+    }
     .hero {
         aspect-ratio: auto;
         height: 1100px;
-        background-size: cover 65%;
+        background-size: cover;
+        background-position: center 65%;;
     }
 
     .hero h1 {

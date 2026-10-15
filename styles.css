@@ -129,7 +129,44 @@ body {
 .hero p {
     margin-left: 16px;
 }
+.hero-recipes {
+     position: relative;
+    isolation: isolate;
+    background-color: #f1ede4;
+    aspect-ratio: 5.6 / 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
 
+.hero-recipes::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 62%;
+    z-index: -1;
+    background: url("Images/RecipeHeroImg.jpg") right 75% / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 35%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 35%);
+}
+.hero-recipes h1 {
+    color: #1f3a2a;
+    font-size: 3rem;
+    margin: 0 0 0.75rem 0;
+}
+.hero-recipes p {
+    font-size: 1.1rem;
+    color: #1f3a2a;
+    margin: 0;
+}
+.hero-recipes h1,
+.hero-recipes p {
+    max-width: 600px;
+}
 /* Homepage recipe search form */
 .search-bar {
     position: relative;
@@ -229,7 +266,7 @@ body {
 }
 
 /* Small-screen navbar layout */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .navbar {
         flex-direction: column;
         align-items: center;
@@ -272,5 +309,70 @@ body {
     .hero{
         background-size:cover;
         padding: 3rem 1.5rem;
+       aspect-ratio: auto;
+    }
+}
+/* Large monitors: cap the hero height and scale up the hero content */
+@media (min-width: 1921px) {
+    .hero {
+        aspect-ratio: auto;
+        height: 1100px;
+        background-size: cover 65%;
+    }
+
+
+    .hero h1 {
+        font-size: 64px;
+    }
+
+
+    .hero p {
+        font-size: 1.3rem;
+        margin: 20px 0;
+    }
+
+
+    .search-bar {
+        width: min(520px, 90%);
+        margin: 1.5rem 0 0 0;
+    }
+
+
+    .search-bar input {
+        padding: 18px 24px;
+        padding-right: 65px;
+        font-size: 1.2rem;
+        border-radius: 40px;
+    }
+
+
+    .search-bar button {
+        right: 14px;
+        padding: 10px;
+    }
+
+
+    .search-bar button svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+@media (max-width: 700px) {
+    .hero-recipes::before {
+        width: 100%;
+        opacity: 0.2;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .hero-recipes h1,
+    .hero-recipes p {
+        max-width: none;
+    }
+}
+@media (max-width: 1100px) {
+    .hero-recipes {
+        aspect-ratio: auto;
+        min-height: 220px;
     }
 }

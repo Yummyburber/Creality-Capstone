@@ -1,0 +1,179 @@
+/* General Page Styling */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f1ea;
+    color: #333;
+    min-height: 100vh;
+}
+
+
+/* Main Container */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+/* Authentication Card */
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Logo / Website Name */
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.logo p {
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* Forms */
+
+.form-section {
+    display: none;
+}
+
+.form-section.active {
+    display: block;
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.form-description {
+    text-align: center;
+    color: #777;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+
+/* Form Groups */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #555;
+}
+
+
+/* Submit Button */
+
+.submit-btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.submit-btn:hover {
+    background-color: #555;
+}
+
+
+/* Login / Signup Toggle */
+
+.toggle-text {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: #666;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.toggle-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* Mobile Responsive Styling */
+
+@media (max-width: 500px) {
+
+    .auth-container {
+        padding: 15px;
+    }
+
+    .auth-card {
+        padding: 25px 20px;
+    }
+
+    .logo h1 {
+        font-size: 23px;
+    }
+
+    .form-section h2 {
+        font-size: 21px;
+    }
+
+    .form-group input {
+        padding: 11px;
+    }
+
+    .submit-btn {
+        padding: 12px;
+    }
+}

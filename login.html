@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Budget Meal Creator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="logo">
+                <h1>DIY Budget Meal Creator</h1>
+                <p>Affordable meals. Your way.</p>
+            </div>
+
+            <!-- Login Form -->
+            <section id="login-section" class="form-section active">
+
+                <h2>Welcome Back!</h2>
+                <p class="form-description">
+                    Log in to create and save your budget-friendly meals.
+                </p>
+
+                <form id="login-form">
+
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input
+                            type="email"
+                            id="login-email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input
+                            type="password"
+                            id="login-password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Log In
+                    </button>
+
+                </form>
+
+                <p class="toggle-text">
+                    Don't have an account?
+                    <button type="button" id="show-signup" class="toggle-btn">
+                        Sign Up
+                    </button>
+                </p>
+
+            </section>
+
+
+            <!-- Signup Form -->
+            <section id="signup-section" class="form-section">
+
+                <h2>Create an Account</h2>
+                <p class="form-description">
+                    Sign up to start creating affordable meals.
+                </p>
+
+                <form id="signup-form">
+
+                    <div class="form-group">
+                        <label for="signup-name">Name</label>
+                        <input
+                            type="text"
+                            id="signup-name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input
+                            type="email"
+                            id="signup-email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input
+                            type="password"
+                            id="signup-password"
+                            name="password"
+                            placeholder="Create a password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="confirm-password"
+                            name="confirm-password"
+                            placeholder="Confirm your password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Sign Up
+                    </button>
+
+                </form>
+
+                <p class="toggle-text">
+                    Already have an account?
+                    <button type="button" id="show-login" class="toggle-btn">
+                        Log In
+                    </button>
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

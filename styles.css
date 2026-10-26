@@ -65,3 +65,47 @@ display: block;
     width: 40px;
     object-fit: contain;
 }
+
+/* ===== Dark Mode ===== */
+.theme-toggle {
+    background: none;
+    border: 1px solid #777;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .navbar {
+    background-color: #1e1e1e;
+}
+
+body.dark footer a {
+    color: #8ab4f8;
+}
+
+/* ===== 404 Page ===== */
+.not-found {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.not-found h1 {
+    font-size: 80px;
+    margin: 0;
+}
+
+.not-found a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+}

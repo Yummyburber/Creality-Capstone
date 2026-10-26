@@ -177,3 +177,45 @@ body {
         padding: 12px;
     }
 }
+
+/* ===== Dark Mode ===== */
+.theme-toggle {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .auth-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .logo p,
+body.dark .form-description,
+body.dark .toggle-text {
+    color: #aaa;
+}
+
+body.dark .form-group input {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark .submit-btn {
+    background-color: #e0e0e0;
+    color: #121212;
+}
+
+body.dark .toggle-btn {
+    color: #e0e0e0;
+}

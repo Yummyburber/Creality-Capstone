@@ -398,8 +398,9 @@ body {
     .hero-recipes {
         aspect-ratio: auto;
         min-height: 220px;
+    }
     .search-bar button svg {
         width: 28px;
         height: 28px;
     }
-}
+    }

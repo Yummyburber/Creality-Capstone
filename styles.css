@@ -206,6 +206,25 @@ body {
     font-size: 1.2rem;
 }
 
+.recipes-search-bar {
+    border: 1px solid #5a5959;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.85);
+    padding: 8px 12px;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+   width: 50%;
+}
+.recipes-search-bar input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+}
+
 /* Homepage feature cards */
 .cards-section {
     padding: 1rem 1.5rem;

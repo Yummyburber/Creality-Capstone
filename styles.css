@@ -9,10 +9,11 @@ body {
 .navbar {
     background-color: #333;
     color: #f0f0f0;
-    padding: 0.12rem 0;
+    padding: 0.12rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .navbar .logo {
     display: flex;
@@ -326,6 +327,19 @@ body {
         height: 25px;
         width: 25px;
     }
+    .theme-toggle {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .theme-toggle svg {
+        width: 16px;
+        height: 16px;
+    }
+
     .hero{
         background-size:cover;
         padding: 3rem 1.5rem;
@@ -404,3 +418,99 @@ body {
         height: 28px;
     }
     }
+}
+
+/* ===== Dark Mode ===== */
+.theme-toggle {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: transparent;
+    color: #cfcccc;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(-20deg);
+}
+
+/* Show the moon in light mode, the sun in dark mode */
+.theme-toggle .icon-sun,
+body.dark .theme-toggle .icon-moon {
+    display: none;
+}
+
+body.dark .theme-toggle .icon-sun {
+    display: block;
+}
+
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .navbar {
+    background-color: #1e1e1e;
+}
+
+body.dark .cards-section {
+    background: #181818;
+}
+
+body.dark .feature-card {
+    color: #e0e0e0;
+    border-color: #333;
+}
+
+body.dark .feature-card > i:first-child,
+body.dark .feature-card > svg:first-child {
+    color: #7fb28d;
+}
+
+body.dark footer a {
+    color: #8ab4f8;
+}
+
+/* ===== 404 Page ===== */
+.not-found {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.not-found h1 {
+    font-size: 80px;
+    margin: 0;
+}
+
+.not-found a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+}

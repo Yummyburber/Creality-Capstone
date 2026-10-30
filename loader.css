@@ -1,0 +1,184 @@
+/* ===== Page Loader ===== */
+/* Full-screen simmering hot pot (our logo) shown while a page loads (see loader.js) */
+.page-loader {
+    --pl-bg: #f1ede4;
+    --pl-text: #1f3a2a;
+    --pl-muted: #6b6b63;
+    --pl-shadow: rgba(31, 58, 42, 0.18);
+    --pl-steam: #b9b3a6;
+
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--pl-bg);
+    font-family: Arial, sans-serif;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.page-loader.is-dark {
+    --pl-bg: #121212;
+    --pl-text: #e0e0e0;
+    --pl-muted: #9a9a92;
+    --pl-shadow: rgba(0, 0, 0, 0.6);
+    --pl-steam: #6a6a64;
+}
+
+.page-loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* The pot is a button so it can be clicked or tapped */
+.page-loader__pot {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.page-loader__pot:hover {
+    transform: translateY(-3px);
+}
+
+.page-loader__pot:focus-visible {
+    outline: 2px solid var(--pl-text);
+    outline-offset: 6px;
+    border-radius: 50%;
+}
+
+.page-loader__pot svg {
+    display: block;
+    width: 170px;
+    height: auto;
+    overflow: visible;
+    filter: drop-shadow(0 8px 10px var(--pl-shadow));
+}
+
+.page-loader__text {
+    margin: 0.75rem 0 0;
+    color: var(--pl-text);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* The three dots after "Loading" hop one after another */
+.page-loader__dots span {
+    display: inline-block;
+    animation: pl-dot 1.2s ease-in-out infinite;
+}
+
+.page-loader__dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.page-loader__dots span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Shared settings so shapes spin and scale around their own center */
+.pl-pot,
+.pl-stir,
+.pl-yolk,
+.pl-bubble,
+.pl-toss,
+.pl-steam path {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+/* The whole pan rocks gently, like it's being stirred */
+.pl-stir {
+    animation: pl-stir 2.4s ease-in-out infinite;
+}
+
+/* The egg yolk jiggles */
+.pl-yolk {
+    animation: pl-yolk 0.9s ease-in-out infinite alternate;
+}
+
+/* Bubbles pop on the empty parts of the pan */
+.pl-bubble {
+    fill: none;
+    stroke: #8a8a85;
+    stroke-width: 4;
+    animation: pl-bubble 2.6s ease-out infinite both;
+}
+
+.pl-steam path {
+    fill: none;
+    stroke: var(--pl-steam);
+    stroke-width: 14;
+    stroke-linecap: round;
+    animation: pl-steam 2.6s ease-out infinite both;
+}
+
+/* Ingredient dropped in from above when the pot is clicked */
+.pl-toss {
+    animation: pl-toss 1.1s ease-in both;
+}
+
+.pl-pot.is-bumped {
+    animation: pl-bump 0.35s ease-out;
+}
+
+@keyframes pl-stir {
+    0%, 100% { transform: rotate(-5deg); }
+    50%      { transform: rotate(5deg); }
+}
+
+@keyframes pl-yolk {
+    from { transform: scale(1.06, 1); }
+    to   { transform: scale(1, 1.06); }
+}
+
+@keyframes pl-bubble {
+    0%       { transform: scale(0); opacity: 0; }
+    20%      { opacity: 1; }
+    40%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes pl-steam {
+    0%   { transform: translateY(20px); opacity: 0; }
+    40%  { opacity: 0.8; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* Starts big (close to you) and shrinks as it falls into the pot, then sinks in */
+@keyframes pl-toss {
+    0%   { transform: scale(2.6); opacity: 0; }
+    15%  { opacity: 1; }
+    55%  { transform: scale(1); opacity: 1; }
+    68%  { transform: scale(1.12); }
+    80%  { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.7); opacity: 0; }
+}
+
+@keyframes pl-dot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30%           { transform: translateY(-6px); opacity: 1; }
+}
+
+@keyframes pl-bump {
+    40% { transform: scale(1.06) rotate(3deg); }
+}
+
+/* People who turn off animations in their device settings get a still pot */
+@media (prefers-reduced-motion: reduce) {
+    .page-loader *,
+    .page-loader *::before,
+    .page-loader *::after {
+        animation: none !important;
+    }
+
+    .pl-bubble,
+    .pl-steam {
+        display: none;
+    }
+}

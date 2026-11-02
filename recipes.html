@@ -10,6 +10,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Edu+QLD+Hand:wght@400..700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
         <script src="homepage.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="recipes.js" defer></script>
     </head>
 
     <body>
@@ -43,9 +45,37 @@
         </section> 
         <section class="recipes-search">
             <div class="recipes-search-bar">
+                <i data-lucide="search"></i>
                 <input type="search" placeholder="Search for recipes..." aria-label="Search for recipes">
             </div>
+            
+            <select id="meal-type" class="recipes-filter" aria-label="Meal type">
+                <option value="">Meal Type</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snack">Snack</option>
+            </select>
+            <select id="dietary-needs" class="recipes-filter" aria-label="Dietary needs">
+                <option value="">Dietary Needs</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Gluten-free">Gluten-free</option>
+                <option value="Dairy-free">Dairy-free</option>
+            </select>
+
+            <button type="button" class="recipes-search-button" aria-label="Import recipes">Import +</button>
+            <button type="button" class="recipes-search-button" id="clear-filters" >Clear</button>
         </section>
+        <section class="feature-recipes">
+             <h2>Featured Recipes</h2>
+            <div class="recipes-grid">
+                
+
+            </div>
+            
+        </section>
+        
 
        </main>
        <footer>

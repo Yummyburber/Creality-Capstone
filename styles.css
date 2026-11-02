@@ -205,19 +205,29 @@ body {
 
 .search-bar button i {
     color: #333;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+}
+.recipes-search {
+    display: flex;
+   align-items: center;
+   column-gap: 0.75rem;
 }
 
 .recipes-search-bar {
-    border: 1px solid #5a5959;
+    border: 1px solid #cecbcb;
     border-radius: 10px;
     background: rgba(255,255,255,0.85);
     padding: 8px 12px;
     margin-top: 1rem;
-    margin-right: 2rem;
+    margin-right: 0;
     margin-bottom: 1rem;
     margin-left: 2rem;
    width: 50%;
+   display:flex;
+   align-items: center;
+   column-gap: 0.75rem;
+   height: 44px;
+   box-sizing: border-box;
 }
 .recipes-search-bar input {
     width: 100%;
@@ -225,6 +235,33 @@ body {
     outline: none;
     font-size: 1rem;
     background: transparent;
+}
+.recipes-search-button {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #cecbcb;
+    border-radius: 25px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+.recipes-filter {
+    border: 1px solid #cecbcb;
+    border-radius: 10px;
+    background: rgba(235, 232, 232, 0.85);
+    padding: 11px 12px;
+    margin-top: 1rem;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    width: 200px;
+    height: 44px;
+   box-sizing: border-box;
+   font-size: 1rem;
 }
 
 /* Homepage feature cards */
@@ -271,6 +308,55 @@ body {
     width: 24px;
     margin-top: auto;
     align-self: flex-end;
+}
+
+/* Featured recipes section */
+.feature-recipes {
+    padding: 2rem 1.5rem;
+    background: #faf9f6;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+}
+
+.recipe-card {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #dddbd7;
+    border-radius: 8px;
+    padding-top: 0.6rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 0.6rem;
+    background-color: #ffffff;
+}
+.recipe-card .card-arrow {
+    width: 24px;
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.recipe-card h3 {
+    margin: 0.4rem 0 0.25rem;
+    font-size: 1rem;
+}
+
+.recipe-card p {
+    margin: 0;
+    line-height: 1.25;
+}
+
+.recipe-card a {
+    margin-top: auto;
+    align-self: center;
 }
 
 /* Responsive card grid breakpoints */
@@ -417,7 +503,7 @@ body {
         width: 28px;
         height: 28px;
     }
-    }
+    
 }
 
 /* ===== Dark Mode ===== */

@@ -9,16 +9,16 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Edu+QLD+Hand:wght@400..700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
-        <script src="homepage.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script src="recipes.js" defer></script>
+        <script src="theme.js" defer></script>
     </head>
 
     <body>
         <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="Images/hot-pot (1).png" alt="Hot Pot">
+                <img src="/Images/hot-pot (1).png" alt="Hot Pot">
                 <h2>Meal Maker</h2>
             </div>
             <ul class="nav-links">
@@ -64,8 +64,9 @@
                 <option value="Dairy-free">Dairy-free</option>
             </select>
 
-            <button type="button" class="recipes-search-button" aria-label="Import recipes">Import +</button>
             <button type="button" class="recipes-search-button" id="clear-filters" >Clear</button>
+            <button type="button" id="import-recipes" class="recipes-search-button" aria-label="Import recipes">Import +</button>
+
         </section>
         <section class="feature-recipes">
              <h2>Featured Recipes</h2>

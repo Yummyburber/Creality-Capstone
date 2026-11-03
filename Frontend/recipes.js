@@ -7,6 +7,9 @@
 //const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 //sample data//
+
+console.log("Recipes JavaScript is running");
+
 const sampleRecipes = [
     {
         id: 1,
@@ -28,13 +31,15 @@ const sampleRecipes = [
         mealType: "Dinner",
         time: "30 min",
         difficulty: "Easy"
+
     },
     {
         id: 4,
         title: "Chicken Caesar Salad",
         mealType: "Dinner",
         time: "30 min",
-        difficulty: "Easy"
+        difficulty: "Easy",
+        dietaryNeeds: ["Gluten-free"]
     }
 ];
 
@@ -49,17 +54,18 @@ const sectionHeading = document.querySelector(".section-heading");
 let allRecipes = sampleRecipes;
 
 //load recipes from database//
-async function loadRecipes() {
-    const { data, error } = await supabaseClient
-        .from('recipes')
-        .select('*');
-    if (error) {
-        console.error('Error loading recipes:', error);
-    } else {
-        allRecipes = data;
-        renderRecipes(allRecipes);
-    }
-}
+// TODO: enable when supabase is set up and connected
+//async function loadRecipes() {
+   // const { data, error } = await supabaseClient
+       // .from('recipes')
+     //   .select('*');
+   // if (error) {
+   //     console.error('Error loading recipes:', error);
+  //  } else {
+   //     allRecipes = data.length > 0 ? data : sampleRecipes;
+    //    renderRecipes(allRecipes);
+   // }
+//}//
 
 function createRecipeCard(recipe) {
     const card = document.createElement('article');
@@ -133,10 +139,15 @@ clearFiltersButton.addEventListener("click", function() {
     applyFilters();
 });
 
+const promptBtn = document.getElementById("import-recipes");
+
+//promptBtn.addEventListener("click", function() {
+
+
 // fill search box if homepage sent a search term
 const urlParams = new URLSearchParams(window.location.search);
 const searchTerm = urlParams.get('search');
 if (searchTerm !== null) {
     searchInput.value = searchTerm;
 }
-loadRecipes(sampleRecipes);
+renderRecipes(sampleRecipes);

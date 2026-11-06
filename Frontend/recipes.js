@@ -143,6 +143,13 @@ const promptBtn = document.getElementById("import-recipes");
 
 //promptBtn.addEventListener("click", function() {
 
+//error banner//
+const errorBanner = document.getElementById('error-banner');
+function handleError(event) {
+    errorBanner.textContent = "An error occurred: " + event.message;
+    errorBanner.style.display = 'block';
+}
+window.addEventListener('error', handleError);
 
 // fill search box if homepage sent a search term
 const urlParams = new URLSearchParams(window.location.search);

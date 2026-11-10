@@ -2,8 +2,6 @@
 <html lang="en">
     <head>
 
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DIY Meal Maker</title>
@@ -25,16 +23,22 @@
                 <h2>Meal Maker</h2>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"><i data-lucide="house"></i>Home</a></li>
+                <li><a href="index.html" aria-current="page"><i data-lucide="house"></i>Home</a></li>
                 <li><a href="recipes.html"><i data-lucide="utensils"></i>Recipes</a></li>
                 <li><a href="create.html"><i data-lucide="plus"></i>Create</a></li>
                 <li><a href="Pantry.html"><i data-lucide="can"></i>Pantry</a></li>
                 <li><a href="meal-plan.html"><i data-lucide="cooking-pot"></i>  Meal Plan</a></li>
             </ul>
-            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
-                <i class="icon-moon" data-lucide="moon"></i>
-                <i class="icon-sun" data-lucide="sun"></i>
-            </button>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <i class="icon-moon" data-lucide="moon"></i>
+                    <i class="icon-sun" data-lucide="sun"></i>
+                </button>
+                <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+                    <i class="icon-open" data-lucide="menu"></i>
+                    <i class="icon-close" data-lucide="x"></i>
+                </button>
+            </div>
         </nav>
        </header>
        <main>
@@ -99,5 +103,6 @@
         <script>
             lucide.createIcons();
         </script>
+
     </body>
 </html>

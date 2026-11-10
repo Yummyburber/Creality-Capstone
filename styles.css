@@ -183,10 +183,6 @@ body {
     width: 100%;
     box-sizing: border-box;
     aspect-ratio: 24 / 9.3;
-    background-image: url("Images/HomepageBackground.png");
-    background-repeat: no-repeat;
-    background-position: center 65%;
-    background-size: 100% 110%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -194,6 +190,53 @@ body {
     align-items: flex-start;
     padding: 4rem 2rem 0;
     z-index: 0;
+}
+
+/* The photo sits on its own layer and very slowly zooms in and out */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("Images/HomepageBackground.png");
+    background-repeat: no-repeat;
+    background-position: center 65%;
+    background-size: 100% 110%;
+    transform-origin: center 65%;
+    animation: hero-zoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+}
+
+/* Headline words, tagline and search bar slide in one after another (animations.js) */
+.hero .word {
+    display: inline-block;
+}
+
+.hero.hero-wait .word,
+.hero.hero-wait p,
+.hero.hero-wait .search-bar {
+    opacity: 0;
+}
+
+.hero.hero-in .word,
+.hero.hero-in p,
+.hero.hero-in .search-bar {
+    animation: hero-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero.hero-in h1 > span:first-child .word:nth-child(2) { animation-delay: 0.12s; }
+.hero.hero-in .title-line .word:nth-child(1) { animation-delay: 0.24s; }
+.hero.hero-in .title-line .word:nth-child(2) { animation-delay: 0.36s; }
+.hero.hero-in p { animation-delay: 0.55s; }
+.hero.hero-in .search-bar { animation-delay: 0.7s; }
+
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
 }
 
 .hero h1 {
@@ -370,6 +413,50 @@ body {
    font-size: 1rem;
 }
 
+/* Homepage stats band (numbers count up in animations.js) */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-number {
+    color: var(--nav-text-strong);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 500px) {
+    .stats {
+        gap: 0.5rem;
+        padding: 1.25rem 0.75rem;
+    }
+
+    .stat-number {
+        font-size: 1.35rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+}
+
 /* Homepage feature cards */
 .cards-section {
     padding: 1rem 1.5rem;
@@ -393,6 +480,55 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+/* Cards lift and tilt slightly on hover; the icon gives a little wiggle */
+.feature-card,
+.recipe-card {
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.6s ease var(--reveal-delay, 0s),
+        translate 0.6s ease var(--reveal-delay, 0s);
+}
+
+.feature-card:hover,
+.feature-card:focus-visible,
+.recipe-card:hover {
+    transform: translateY(-6px) rotate(-0.6deg);
+    border-color: var(--accent);
+    box-shadow: 0 12px 24px var(--menu-shadow);
+}
+
+.feature-card:focus-visible {
+    outline: none;
+}
+
+.feature-card:hover > svg:first-child,
+.feature-card:focus-visible > svg:first-child {
+    animation: card-wiggle 0.5s ease;
+}
+
+@keyframes card-wiggle {
+    0%, 100% { transform: rotate(0); }
+    30%      { transform: rotate(-14deg); }
+    60%      { transform: rotate(10deg); }
+}
+
+/* Fade up when scrolled into view (classes added by animations.js) */
+.reveal {
+    opacity: 0;
+    translate: 0 18px;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.stat.reveal {
+    transition: opacity 0.6s ease var(--reveal-delay, 0s), translate 0.6s ease var(--reveal-delay, 0s);
 }
 
 .feature-card > i:first-child,
@@ -481,6 +617,67 @@ footer a {
 }
 
 
+/* Placeholder cards that shimmer while recipes are loading */
+.recipe-card.is-loading {
+    gap: 0.6rem;
+    pointer-events: none;
+}
+
+.recipe-card.is-loading:hover {
+    transform: none;
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+.skeleton {
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--surface-alt) 0%, var(--border) 50%, var(--surface-alt) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s linear infinite;
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 140px;
+}
+
+.skeleton-line {
+    width: 80%;
+    height: 12px;
+}
+
+.skeleton-line--short {
+    width: 50%;
+}
+
+.skeleton-button {
+    width: 45%;
+    height: 28px;
+    margin-top: auto;
+    align-self: center;
+    border-radius: 14px;
+}
+
+@keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
+/* No motion for people who turn off animations in their device settings */
+@media (prefers-reduced-motion: reduce) {
+    .hero::before,
+    .skeleton,
+    .feature-card:hover > svg:first-child {
+        animation: none;
+    }
+
+    .feature-card:hover,
+    .feature-card:focus-visible,
+    .recipe-card:hover {
+        transform: none;
+    }
+}
+
 /** Error banner styles */
 #error-banner {
     display: none;
@@ -532,9 +729,12 @@ footer a {
 /* Small-screen navbar layout */
 @media (max-width: 600px) {
     .hero{
-        background-size:cover;
         padding: 3rem 1.5rem;
        aspect-ratio: auto;
+    }
+
+    .hero::before {
+        background-size: cover;
     }
 }
 /* Large monitors: cap the hero height and scale up the hero content */
@@ -542,8 +742,10 @@ footer a {
     .hero {
         aspect-ratio: auto;
         height: 1100px;
+    }
+
+    .hero::before {
         background-size: cover;
-        background-position: center 65%;;
     }
 
     .hero h1 {

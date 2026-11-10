@@ -6,14 +6,19 @@ body {
 }
 
 /* Navbar layout, links, and action controls */
+/* Three columns keep the links centered: logo, links, buttons */
 .navbar {
     background-color: #333;
     color: #f0f0f0;
-    padding: 0.12rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
+    padding: clamp(0.6rem, 1vw, 0.85rem) clamp(0.75rem, 2vw, 1.5rem);
+    border-bottom: 3px solid #e9a03b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
     align-items: center;
+    column-gap: clamp(0.5rem, 1.5vw, 1.5rem);
     position: relative;
+    z-index: 10;
 }
 .navbar .logo {
     display: flex;
@@ -23,61 +28,77 @@ body {
 
 .navbar .logo h2{
     margin: 0;
-    font-size: 1.7rem;
+    font-size: clamp(1.15rem, 1.8vw, 1.7rem);
+    white-space: nowrap;
 }
 
 .navbar .logo img{
-    height: 56px;
-    width: 56px;
+    height: clamp(40px, 4vw, 56px);
+    width: clamp(40px, 4vw, 56px);
     object-fit: contain;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 3.5rem;
-    
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(0.75rem, 3.2vw, 5.5rem);
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {
-    padding: 0.25rem 3.25rem;
+    padding: 0.25rem 0;
 }
 
 .nav-links li a {
     color: #cfcccc;
     text-decoration: none;
     font-weight: bold;
-    border-bottom: 4px solid transparent;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 8px;
-    
+    position: relative;
+    transition: color 0.2s;
 }
 
-.nav-links li a:hover {
-    border-bottom: 4px solid #fff;
+/* Warm underline that grows from the center on hover and marks the current page */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: #e9a03b;
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
 }
 
-.nav-actions button {
-    display: grid;
-    place-items: center;
-    padding: 0.4rem;
-    border: 0;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
+.nav-links li a svg {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
 }
 
-.nav-actions button i {
-    width: 20px;
-    height: 20px;
+.nav-links li a:hover,
+.nav-links li a[aria-current="page"] {
+    color: #fff;
 }
 
-.nav-actions button:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
+.nav-links li a:hover::after,
+.nav-links li a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
 /* Hero section and heading typography */
@@ -374,58 +395,6 @@ body {
 
 /* Small-screen navbar layout */
 @media (max-width: 600px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-        padding: 0.25rem;
-        padding-top: 30px;
-        gap: 0.2rem;
-    }
-
-    .nav-links {
-        justify-content: center;
-        gap: 0.2rem;
-        width: 100%;
-    }
-
-    .nav-links li {
-        padding: 0;
-    }
-
-    .nav-links li a {
-        font-size: 0.55rem;
-    }
-
-    .nav-links li a i {
-        display: none;
-    }
-
-    .navbar .logo {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .navbar .logo h2 {
-        font-size: 0.7rem;
-    }
-
-    .navbar .logo img {
-        height: 25px;
-        width: 25px;
-    }
-    .theme-toggle {
-        position: absolute;
-        top: 6px;
-        right: 10px;
-        width: 30px;
-        height: 30px;
-    }
-
-    .theme-toggle svg {
-        width: 16px;
-        height: 16px;
-    }
-
     .hero{
         background-size:cover;
         padding: 3rem 1.5rem;
@@ -434,14 +403,6 @@ body {
 }
 /* Large monitors: cap the hero height and scale up the hero content */
 @media (min-width: 1921px) {
-    
-    .nav-links {
-    gap: 3.5rem;
-    }
-
-    .nav-links li {
-    padding: 0.25rem 7.25rem;
-    }
     .hero {
         aspect-ratio: auto;
         height: 1100px;
@@ -508,7 +469,8 @@ body {
 
 
 /* ===== Dark Mode ===== */
-.theme-toggle {
+.theme-toggle,
+.menu-toggle {
     flex-shrink: 0;
     width: 40px;
     height: 40px;
@@ -523,18 +485,21 @@ body {
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.menu-toggle:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.5);
     color: #fff;
 }
 
-.theme-toggle:focus-visible {
+.theme-toggle:focus-visible,
+.menu-toggle:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 2px;
 }
 
-.theme-toggle svg {
+.theme-toggle svg,
+.menu-toggle svg {
     width: 20px;
     height: 20px;
     transition: transform 0.3s;
@@ -552,6 +517,90 @@ body.dark .theme-toggle .icon-moon {
 
 body.dark .theme-toggle .icon-sun {
     display: block;
+}
+
+/* ===== Navbar on smaller screens ===== */
+/* The menu button only appears on phones */
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle .icon-close,
+.navbar.menu-open .menu-toggle .icon-open {
+    display: none;
+}
+
+.navbar.menu-open .menu-toggle .icon-close {
+    display: block;
+}
+
+/* Tight on space: drop the link icons and keep the words */
+@media (min-width: 701px) and (max-width: 950px) {
+    .nav-links li a svg {
+        display: none;
+    }
+}
+
+/* Phones: one slim row, with the links in a drop-down menu */
+@media (max-width: 700px) {
+    .navbar {
+        grid-template-columns: 1fr auto;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .navbar .logo img {
+        height: 36px;
+        width: 36px;
+    }
+
+    .theme-toggle,
+    .menu-toggle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .menu-toggle {
+        display: grid;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 3px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background-color: inherit;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .navbar.menu-open .nav-links {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 0;
+    }
+
+    .nav-links li a {
+        padding: 0.8rem 1.25rem;
+        font-size: 1rem;
+        gap: 12px;
+    }
+
+    .nav-links li a::after {
+        display: none;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a[aria-current="page"] {
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-links li a[aria-current="page"] {
+        color: #e9a03b;
+    }
 }
 
 body.dark {

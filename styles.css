@@ -380,6 +380,17 @@ body {
     align-self: center;
 }
 
+
+/** Error banner styles */
+#error-banner {
+    display: none;
+    background-color: #dba6a6;
+    color: rgb(155, 4, 4);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 10px;
+}
+
 /* Responsive card grid breakpoints */
 @media (max-width: 800px) {
     .cards-grid {

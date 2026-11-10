@@ -21,6 +21,12 @@ if (themeToggle) {
     updateToggleLabel();
 
     themeToggle.addEventListener("click", function () {
+        //Fade the colors only while switching, then turn the fade back off
+        document.documentElement.classList.add("theme-transition");
+        setTimeout(function () {
+            document.documentElement.classList.remove("theme-transition");
+        }, 400);
+
         document.body.classList.toggle("dark");
         const isDark = document.body.classList.contains("dark");
         localStorage.setItem("theme", isDark ? "dark" : "light");

@@ -151,10 +151,10 @@ function handleError(event) {
 }
 window.addEventListener('error', handleError);
 
-// fill search box if homepage sent a search term
+// fill search box if homepage sent a search term (homepage.js uses ?query=)
 const urlParams = new URLSearchParams(window.location.search);
-const searchTerm = urlParams.get('search');
+const searchTerm = urlParams.get('query');
 if (searchTerm !== null) {
     searchInput.value = searchTerm;
 }
-renderRecipes(sampleRecipes);
+applyFilters();

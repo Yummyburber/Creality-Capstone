@@ -20,6 +20,8 @@
     --input-border: #333;
     --button-bg: #31513a;
     --button-text: #fff;
+    --danger: #b3261e;
+    --menu-shadow: rgba(40, 30, 10, 0.18);
 }
 
 body.dark {
@@ -42,6 +44,8 @@ body.dark {
     --input-border: #555;
     --button-bg: #e6e3dc;
     --button-text: #121212;
+    --danger: #f2b8b5;
+    --menu-shadow: rgba(0, 0, 0, 0.55);
 }
 
 /* Smooth fade only while the toggle is switching themes (not on every page load) */
@@ -74,10 +78,28 @@ body {
     position: relative;
     z-index: 10;
 }
+/* The logo is a link back to the homepage */
 .navbar .logo {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-self: start;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.navbar .logo img {
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover img {
+    transform: rotate(-12deg) scale(1.06);
+}
+
+.navbar .logo:focus-visible {
+    outline: 2px solid var(--nav-text-strong);
+    outline-offset: 4px;
 }
 
 .navbar .logo h2{
@@ -582,8 +604,7 @@ footer a {
 }
 
 
-/* ===== Dark Mode ===== */
-.theme-toggle,
+/* ===== Navbar buttons ===== */
 .menu-toggle {
     flex-shrink: 0;
     width: 40px;
@@ -599,38 +620,20 @@ footer a {
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.theme-toggle:hover,
 .menu-toggle:hover {
     background-color: var(--control-hover);
     border-color: var(--nav-text);
     color: var(--nav-text-strong);
 }
 
-.theme-toggle:focus-visible,
 .menu-toggle:focus-visible {
     outline: 2px solid var(--nav-text-strong);
     outline-offset: 2px;
 }
 
-.theme-toggle svg,
 .menu-toggle svg {
     width: 20px;
     height: 20px;
-    transition: transform 0.3s;
-}
-
-.theme-toggle:hover svg {
-    transform: rotate(-20deg);
-}
-
-/* Show the moon in light mode, the sun in dark mode */
-.theme-toggle .icon-sun,
-body.dark .theme-toggle .icon-moon {
-    display: none;
-}
-
-body.dark .theme-toggle .icon-sun {
-    display: block;
 }
 
 /* ===== Navbar on smaller screens ===== */
@@ -667,7 +670,6 @@ body.dark .theme-toggle .icon-sun {
         width: 36px;
     }
 
-    .theme-toggle,
     .menu-toggle {
         width: 36px;
         height: 36px;
@@ -714,6 +716,340 @@ body.dark .theme-toggle .icon-sun {
 
     .nav-links li a[aria-current="page"] {
         color: var(--accent-text);
+    }
+}
+
+/* ===== Profile button and menu ===== */
+.profile {
+    position: relative;
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.profile-button:hover,
+.profile.open .profile-button {
+    border-color: var(--accent);
+}
+
+.profile-button:active {
+    transform: scale(0.94);
+}
+
+.profile-button:focus-visible {
+    outline: 2px solid var(--nav-text-strong);
+    outline-offset: 2px;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--brand);
+    color: var(--surface);
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+}
+
+.profile-avatar svg {
+    width: 60%;
+    height: 60%;
+}
+
+.profile-avatar--large {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+/* The menu drops down from the avatar with a quick fade and scale */
+.profile-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    width: 280px;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background-color: var(--surface);
+    color: var(--text);
+    box-shadow: 0 14px 32px var(--menu-shadow);
+    z-index: 200;
+    transform-origin: top right;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.96);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+
+/* Small arrow pointing up at the avatar */
+.profile-menu::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--surface);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    transform: rotate(45deg);
+}
+
+.profile.open .profile-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.2), visibility 0s;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.5rem 0.75rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.profile-details strong,
+.profile-details span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-details span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.profile-header--guest .profile-details span {
+    white-space: normal;
+}
+
+.profile-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.65rem;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.95rem;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.profile-item:hover,
+.profile-item:focus-visible {
+    background-color: var(--control-hover);
+    outline: none;
+}
+
+.profile-item:hover svg,
+.profile-item:focus-visible svg {
+    color: var(--accent-text);
+    transform: translateX(2px);
+}
+
+.profile-item--danger,
+.profile-item--danger svg,
+.profile-item--danger:hover svg {
+    color: var(--danger);
+}
+
+/* Items slide in one after another when the menu opens */
+.profile-item,
+.profile-actions {
+    opacity: 0;
+    transform: translateY(-4px);
+}
+
+.profile.open .profile-item,
+.profile.open .profile-actions {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.15s;
+    transition-delay: calc(var(--item-index, 0) * 25ms);
+}
+
+.profile-divider {
+    height: 1px;
+    margin: 0.35rem 0.25rem;
+    background-color: var(--border);
+}
+
+/* On/off switch for dark mode inside the menu */
+.profile-switch {
+    position: relative;
+    width: 34px;
+    height: 20px;
+    margin-left: auto;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background-color: var(--border);
+    transition: background-color 0.2s;
+}
+
+.profile-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+[aria-checked="true"] > .profile-switch {
+    background-color: var(--accent);
+}
+
+[aria-checked="true"] > .profile-switch::after {
+    transform: translateX(14px);
+}
+
+/* Logged-out state: log in and create account buttons */
+.profile-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.profile-action {
+    flex: 1;
+    padding: 0.55rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: filter 0.2s, background-color 0.2s;
+}
+
+.profile-action:hover,
+.profile-action:focus-visible {
+    background-color: var(--control-hover);
+    outline: none;
+}
+
+.profile-action--primary {
+    border-color: var(--button-bg);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.profile-action--primary:hover,
+.profile-action--primary:focus-visible {
+    background-color: var(--button-bg);
+    filter: brightness(1.15);
+}
+
+/* Short message that pops up at the bottom, like "Settings is coming soon" */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 9000;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    background-color: var(--text);
+    color: var(--page-bg);
+    font-size: 0.9rem;
+    box-shadow: 0 8px 20px var(--menu-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 16px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* Phones: the menu spans the screen under the header */
+@media (max-width: 700px) {
+    .profile {
+        position: static;
+    }
+
+    .profile-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .profile-menu {
+        top: calc(100% + 11px);
+        left: 0.75rem;
+        right: 0.75rem;
+        width: auto;
+    }
+
+    .profile-menu::before {
+        display: none;
+    }
+}
+
+/* Very small phones: tighten the header so all three buttons fit */
+@media (max-width: 380px) {
+    .navbar .logo h2 {
+        font-size: 1rem;
+    }
+
+    .nav-controls {
+        gap: 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-menu,
+    .profile.open .profile-menu,
+    .profile-item,
+    .profile.open .profile-item,
+    .profile-actions,
+    .profile.open .profile-actions,
+    .toast {
+        transform: none;
+        transition-duration: 0s;
+        transition-delay: 0s;
     }
 }
 

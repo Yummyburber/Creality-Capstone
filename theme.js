@@ -6,32 +6,17 @@ if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
     document.body.classList.add("dark");
 }
 
-//Toggle button (only runs if the page has one)
-const themeToggle = document.getElementById("theme-toggle");
+//Switches between light and dark (used by the dark mode switch in the profile menu)
+function toggleTheme() {
+    //Fade the colors only while switching, then turn the fade back off
+    document.documentElement.classList.add("theme-transition");
+    setTimeout(function () {
+        document.documentElement.classList.remove("theme-transition");
+    }, 400);
 
-//Keeps the button's label in sync for screen readers
-function updateToggleLabel() {
+    document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
-    themeToggle.setAttribute("aria-pressed", isDark);
-    themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-    themeToggle.title = isDark ? "Light mode" : "Dark mode";
-}
-
-if (themeToggle) {
-    updateToggleLabel();
-
-    themeToggle.addEventListener("click", function () {
-        //Fade the colors only while switching, then turn the fade back off
-        document.documentElement.classList.add("theme-transition");
-        setTimeout(function () {
-            document.documentElement.classList.remove("theme-transition");
-        }, 400);
-
-        document.body.classList.toggle("dark");
-        const isDark = document.body.classList.contains("dark");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-        updateToggleLabel();
-    });
+    localStorage.setItem("theme", isDark ? "dark" : "light");
 }
 
 //Phone menu button (only runs if the page has one)

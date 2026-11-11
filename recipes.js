@@ -88,9 +88,28 @@ function createRecipeCard(recipe) {
     return card;
 }
 
+//shimmering placeholder cards, shown while recipes are loading//
+function showLoadingCards(count) {
+    recipesGrid.replaceChildren();
+    recipesGrid.setAttribute('aria-busy', 'true');
+
+    for (let i = 0; i < count; i++) {
+        const card = document.createElement('article');
+        card.className = 'recipe-card is-loading';
+        card.setAttribute('aria-hidden', 'true');
+        card.innerHTML =
+            '<div class="skeleton skeleton-image"></div>' +
+            '<div class="skeleton skeleton-line"></div>' +
+            '<div class="skeleton skeleton-line skeleton-line--short"></div>' +
+            '<div class="skeleton skeleton-button"></div>';
+        recipesGrid.appendChild(card);
+    }
+}
+
 //show list of recipes function//
 function renderRecipes(list) {
     recipesGrid.replaceChildren();
+    recipesGrid.setAttribute('aria-busy', 'false');
 
     if (list.length === 0) {
         const message = document.createElement('p');
@@ -157,4 +176,8 @@ const searchTerm = urlParams.get('query');
 if (searchTerm !== null) {
     searchInput.value = searchTerm;
 }
+
+// Placeholders show while recipes load. The sample recipes are instant, so they only
+// become visible once loading from Supabase (loadRecipes) is turned on.
+showLoadingCards(4);
 applyFilters();

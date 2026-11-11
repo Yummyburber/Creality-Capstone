@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="loader.css">
         <script src="homepage.js" defer></script>
+        <script src="animations.js" defer></script>
     </head>
 
     <body>
@@ -41,8 +42,8 @@
 
         <section class="hero">
             <h1>
-                <span>Cook Something</span>
-                <span class="title-line"><span class="hero-highlight">Great</span> today</span>
+                <span><span class="word">Cook</span> <span class="word">Something</span></span>
+                <span class="title-line"><span class="word hero-highlight">Great</span> <span class="word">today</span></span>
             </h1>
             <p><em>Good food. Less money. Your way.</em></p>
             <form class="search-bar">
@@ -51,6 +52,21 @@
             <button type="submit"><i data-lucide="search"></i></button>
             </form>
             
+        </section>
+        <!-- PLACEHOLDER NUMBERS: replace data-count (and the text) with real figures before launch -->
+        <section class="stats" aria-label="Meal Maker in numbers">
+            <div class="stat">
+                <span class="stat-number" data-count="1240">1,240</span>
+                <span class="stat-label">recipes to explore</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-count="4.5" data-decimals="2" data-prefix="$">$4.50</span>
+                <span class="stat-label">average cost per meal</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-count="25" data-suffix=" min">25 min</span>
+                <span class="stat-label">average cooking time</span>
+            </div>
         </section>
         <section class="cards-section">
             <div class="cards-grid">

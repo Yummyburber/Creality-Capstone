@@ -8,11 +8,13 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f1ea;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(226, 166, 92, 0.22), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(104, 139, 92, 0.20), transparent 30%),
+        linear-gradient(135deg, #f8f1e5, #eee5d5);
     color: #333;
     min-height: 100vh;
 }
-
 
 /* Main Container */
 
@@ -24,20 +26,18 @@ body {
     padding: 20px;
 }
 
-
 /* Authentication Card */
 
 .auth-card {
     width: 100%;
     max-width: 450px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.96);
     padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(80, 60, 35, 0.14);
 }
 
-
-/* Logo / Website Name */
+/* Logo */
 
 .logo {
     text-align: center;
@@ -47,13 +47,13 @@ body {
 .logo h1 {
     font-size: 28px;
     margin-bottom: 8px;
+    color: #465b3c;
 }
 
 .logo p {
     color: #777;
     font-size: 14px;
 }
-
 
 /* Forms */
 
@@ -76,8 +76,8 @@ body {
     color: #777;
     margin-bottom: 25px;
     font-size: 14px;
+    line-height: 1.5;
 }
-
 
 /* Form Groups */
 
@@ -102,9 +102,29 @@ body {
 
 .form-group input:focus {
     outline: none;
-    border-color: #555;
+    border-color: #71865c;
+    box-shadow: 0 0 0 2px rgba(113, 134, 92, 0.15);
 }
 
+/* Forgot Password */
+
+.forgot-password {
+    text-align: right;
+    margin-top: -8px;
+    margin-bottom: 15px;
+}
+
+.forgot-password button {
+    background: none;
+    border: none;
+    color: #637d4d;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.forgot-password button:hover {
+    text-decoration: underline;
+}
 
 /* Submit Button */
 
@@ -113,7 +133,7 @@ body {
     padding: 13px;
     border: none;
     border-radius: 6px;
-    background-color: #333;
+    background-color: #526b43;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -122,9 +142,13 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: #555;
+    background-color: #405635;
 }
 
+.submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
 
 /* Login / Signup Toggle */
 
@@ -138,7 +162,7 @@ body {
 .toggle-btn {
     background: none;
     border: none;
-    color: #333;
+    color: #526b43;
     font-weight: bold;
     cursor: pointer;
     font-size: 14px;
@@ -148,11 +172,9 @@ body {
     text-decoration: underline;
 }
 
-
 /* Mobile Responsive Styling */
 
 @media (max-width: 500px) {
-
     .auth-container {
         padding: 15px;
     }
@@ -176,4 +198,50 @@ body {
     .submit-btn {
         padding: 12px;
     }
+}
+
+/* Dark Mode */
+
+body.dark {
+    background: #121a14;
+    color: #e0e0e0;
+}
+
+body.dark .auth-card {
+    background-color: #1e2921;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .logo h1 {
+    color: #c3d5ad;
+}
+
+body.dark .logo p,
+body.dark .form-description,
+body.dark .toggle-text {
+    color: #aaa;
+}
+
+body.dark .form-group input {
+    background-color: #2a352d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark .form-group input:focus {
+    border-color: #9bb583;
+}
+
+body.dark .submit-btn {
+    background-color: #819b6b;
+    color: #121a14;
+}
+
+body.dark .submit-btn:hover {
+    background-color: #9bb583;
+}
+
+body.dark .toggle-btn,
+body.dark .forgot-password button {
+    color: #b7d29c;
 }

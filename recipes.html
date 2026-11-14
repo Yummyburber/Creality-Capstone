@@ -9,26 +9,31 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Edu+QLD+Hand:wght@400..700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
-        <script src="homepage.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="recipes.js" defer></script>
+        <script src="animations.js" defer></script>
     </head>
 
     <body>
+        <div id="error-banner"></div>
         <header>
         <nav class="navbar">
-            <div class="logo">
-                <img src="Images/hot-pot (1).png" alt="Hot Pot">
+            <a class="logo" href="index.html" aria-label="Meal Maker, go to the homepage">
+                <img src="Images/hot-pot (1).png" alt="">
                 <h2>Meal Maker</h2>
-            </div>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html"><i data-lucide="house"></i>Home</a></li>
-                <li><a href="recipes.html"><i data-lucide="utensils"></i>Recipes</a></li>
+                <li><a href="recipes.html" aria-current="page"><i data-lucide="utensils"></i>Recipes</a></li>
                 <li><a href="create.html"><i data-lucide="plus"></i>Create</a></li>
                 <li><a href="Pantry.html"><i data-lucide="can"></i>Pantry</a></li>
                 <li><a href="meal-plan.html"><i data-lucide="cooking-pot"></i>  Meal Plan</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="#" aria-label = "Profile">Profile </a>
-                <button type="button" aria-label="Toggle light, dark mode"><i data-lucide="sun"></i></button>
+            <div class="nav-controls">
+                <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+                    <i class="icon-open" data-lucide="menu"></i>
+                    <i class="icon-close" data-lucide="x"></i>
+                </button>
             </div>
         </nav>
        </header>
@@ -41,12 +46,49 @@
             <span>Browse our collection of yummy recipes or </span>
             <span>make something from scratch!</span>
         </section> 
+        <section class="recipes-search">
+            <div class="recipes-search-bar">
+                <i data-lucide="search"></i>
+                <input type="search" placeholder="Search for recipes..." aria-label="Search for recipes">
+            </div>
+            
+            <select id="meal-type" class="recipes-filter" aria-label="Meal type">
+                <option value="">Meal Type</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snack">Snack</option>
+            </select>
+            <select id="dietary-needs" class="recipes-filter" aria-label="Dietary needs">
+                <option value="">Dietary Needs</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Gluten-free">Gluten-free</option>
+                <option value="Dairy-free">Dairy-free</option>
+            </select>
+
+            <button type="button" class="recipes-search-button" id="clear-filters" >Clear</button>
+            <button type="button" id="import-recipes" class="recipes-search-button" aria-label="Import recipes">Import +</button>
+
+        </section>
+        <section class="feature-recipes">
+             <h2>Featured Recipes</h2>
+            <div class="recipes-grid">
+                
+
+            </div>
+            
+        </section>
+        
+
        </main>
        <footer>
         <p>&copy; 2026 DIY Meal Maker. All rights reserved.</p> 
         <a href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by amonrat rungreangfangsai - Flaticon</a>
         <p>Icons by Lucide</p>
-       </footer>  
+       </footer>
+        <script src="profile.js"></script>
+        <script src="theme.js"></script>
         <script>
             lucide.createIcons();
         </script>

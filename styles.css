@@ -1,82 +1,180 @@
+/* Site colors: light theme by default, dark theme when body has the "dark" class */
+:root {
+    --page-bg: #f7f4ee;
+    --surface: #fffdf9;
+    --surface-alt: #f1ede4;
+    --text: #1f2a22;
+    --text-muted: #5c6159;
+    --border: #e2ddd3;
+    --brand: #31513a;
+    --link: #31513a;
+    --accent: #e9a03b;
+    --accent-text: #a8620a;
+    --nav-bg: #fffdf9;
+    --nav-text: #4a4a44;
+    --nav-text-strong: #1f3a2a;
+    --nav-shadow: rgba(60, 45, 20, 0.12);
+    --control-border: rgba(0, 0, 0, 0.18);
+    --control-hover: rgba(0, 0, 0, 0.06);
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: #333;
+    --button-bg: #31513a;
+    --button-text: #fff;
+    --danger: #b3261e;
+    --menu-shadow: rgba(40, 30, 10, 0.18);
+}
+
+body.dark {
+    --page-bg: #121212;
+    --surface: #1c1c1c;
+    --surface-alt: #181818;
+    --text: #e6e3dc;
+    --text-muted: #a29f98;
+    --border: #333;
+    --brand: #7fb28d;
+    --link: #8ab4f8;
+    --accent-text: #e9a03b;
+    --nav-bg: #1a1a1a;
+    --nav-text: #cfcccc;
+    --nav-text-strong: #fff;
+    --nav-shadow: rgba(0, 0, 0, 0.45);
+    --control-border: rgba(255, 255, 255, 0.25);
+    --control-hover: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(28, 28, 28, 0.9);
+    --input-border: #555;
+    --button-bg: #e6e3dc;
+    --button-text: #121212;
+    --danger: #f2b8b5;
+    --menu-shadow: rgba(0, 0, 0, 0.55);
+}
+
+/* Smooth fade only while the toggle is switching themes (not on every page load) */
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s !important;
+}
+
 /* Global page defaults */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
+    background-color: var(--page-bg);
+    color: var(--text);
 }
 
 /* Navbar layout, links, and action controls */
+/* Three columns keep the links centered: logo, links, buttons */
 .navbar {
-    background-color: #333;
-    color: #f0f0f0;
-    padding: 0.12rem 0;
-    display: flex;
-    justify-content: space-between;
+    background-color: var(--nav-bg);
+    color: var(--nav-text-strong);
+    padding: clamp(0.6rem, 1vw, 0.85rem) clamp(0.75rem, 2vw, 1.5rem);
+    border-bottom: 3px solid #e9a03b;
+    box-shadow: 0 4px 12px var(--nav-shadow);
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
     align-items: center;
+    column-gap: clamp(0.5rem, 1.5vw, 1.5rem);
+    position: relative;
+    z-index: 10;
 }
+/* The logo is a link back to the homepage */
 .navbar .logo {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-self: start;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.navbar .logo img {
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover img {
+    transform: rotate(-12deg) scale(1.06);
+}
+
+.navbar .logo:focus-visible {
+    outline: 2px solid var(--nav-text-strong);
+    outline-offset: 4px;
 }
 
 .navbar .logo h2{
     margin: 0;
-    font-size: 1.7rem;
+    font-size: clamp(1.15rem, 1.8vw, 1.7rem);
+    white-space: nowrap;
 }
 
 .navbar .logo img{
-    height: 56px;
-    width: 56px;
+    height: clamp(40px, 4vw, 56px);
+    width: clamp(40px, 4vw, 56px);
     object-fit: contain;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 3.5rem;
-    
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(0.75rem, 3.2vw, 5.5rem);
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {
-    padding: 0.25rem 3.25rem;
+    padding: 0.25rem 0;
 }
 
 .nav-links li a {
-    color: #cfcccc;
+    color: var(--nav-text);
     text-decoration: none;
     font-weight: bold;
-    border-bottom: 4px solid transparent;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 8px;
-    
+    position: relative;
+    transition: color 0.2s;
 }
 
-.nav-links li a:hover {
-    border-bottom: 4px solid #fff;
+/* Warm underline that grows from the center on hover and marks the current page */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: #e9a03b;
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
 }
 
-.nav-actions button {
-    display: grid;
-    place-items: center;
-    padding: 0.4rem;
-    border: 0;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
+.nav-links li a svg {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
 }
 
-.nav-actions button i {
-    width: 20px;
-    height: 20px;
+.nav-links li a:hover,
+.nav-links li a[aria-current="page"] {
+    color: var(--nav-text-strong);
 }
 
-.nav-actions button:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
+.nav-links li a:hover::after,
+.nav-links li a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
 /* Hero section and heading typography */
@@ -85,10 +183,6 @@ body {
     width: 100%;
     box-sizing: border-box;
     aspect-ratio: 24 / 9.3;
-    background-image: url("Images/HomepageBackground.png");
-    background-repeat: no-repeat;
-    background-position: center 65%;
-    background-size: 100% 110%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -96,6 +190,53 @@ body {
     align-items: flex-start;
     padding: 4rem 2rem 0;
     z-index: 0;
+}
+
+/* The photo sits on its own layer and very slowly zooms in and out */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("Images/HomepageBackground.png");
+    background-repeat: no-repeat;
+    background-position: center 65%;
+    background-size: 100% 110%;
+    transform-origin: center 65%;
+    animation: hero-zoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+}
+
+/* Headline words, tagline and search bar slide in one after another (animations.js) */
+.hero .word {
+    display: inline-block;
+}
+
+.hero.hero-wait .word,
+.hero.hero-wait p,
+.hero.hero-wait .search-bar {
+    opacity: 0;
+}
+
+.hero.hero-in .word,
+.hero.hero-in p,
+.hero.hero-in .search-bar {
+    animation: hero-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero.hero-in h1 > span:first-child .word:nth-child(2) { animation-delay: 0.12s; }
+.hero.hero-in .title-line .word:nth-child(1) { animation-delay: 0.24s; }
+.hero.hero-in .title-line .word:nth-child(2) { animation-delay: 0.36s; }
+.hero.hero-in p { animation-delay: 0.55s; }
+.hero.hero-in .search-bar { animation-delay: 0.7s; }
+
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
 }
 
 .hero h1 {
@@ -133,7 +274,8 @@ body {
 .hero-recipes {
      position: relative;
     isolation: isolate;
-    background-color: #f1ede4;
+    background-color: var(--surface-alt);
+    color: var(--text);
     aspect-ratio: 5.6 / 1;
     padding: 2rem;
     display: flex;
@@ -155,13 +297,13 @@ body {
     mask-image: linear-gradient(to right, transparent 0%, #000 35%);
 }
 .hero-recipes h1 {
-    color: #1f3a2a;
+    color: var(--nav-text-strong);
     font-size: 3rem;
     margin: 0 0 0.75rem 0;
 }
 .hero-recipes p {
     font-size: 1.1rem;
-    color: #1f3a2a;
+    color: var(--text);
     margin: 0;
 }
 .hero-recipes h1,
@@ -181,10 +323,11 @@ body {
     width: 100%;
     box-sizing: border-box;
     padding: 12px 16px;
-    border: 2px solid #333;
+    border: 2px solid var(--input-border);
     border-radius: 25px;
     padding-right: 45px;
-    background: rgba(255,255,255,0.85);
+    background: var(--input-bg);
+    color: var(--text);
 }
 
 .search-bar input:focus {
@@ -200,17 +343,124 @@ body {
    border: none;
    cursor: pointer;
    padding: 8px;
+   color: var(--text);
 }
 
 .search-bar button i {
-    color: #333;
-    font-size: 1.2rem;
+    color: var(--text);
+    font-size: 1.5rem;
+}
+.recipes-search {
+    display: flex;
+    flex-wrap: wrap;
+   align-items: center;
+   column-gap: 0.75rem;
+}
+
+.recipes-search-bar {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 8px 12px;
+    margin-top: 1rem;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+   width: 50%;
+   display:flex;
+   align-items: center;
+   column-gap: 0.75rem;
+   height: 44px;
+   box-sizing: border-box;
+}
+.recipes-search-bar input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text);
+}
+.recipes-search-button {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--border);
+    background-color: var(--surface);
+    color: var(--text);
+    border-radius: 25px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+.recipes-filter {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 11px 12px;
+    margin-top: 1rem;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    width: 200px;
+    height: 44px;
+   box-sizing: border-box;
+   font-size: 1rem;
+}
+
+/* Homepage stats band (numbers count up in animations.js) */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-number {
+    color: var(--nav-text-strong);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 500px) {
+    .stats {
+        gap: 0.5rem;
+        padding: 1.25rem 0.75rem;
+    }
+
+    .stat-number {
+        font-size: 1.35rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
 }
 
 /* Homepage feature cards */
 .cards-section {
     padding: 1rem 1.5rem;
-    background: #faf9f6;
+    background: var(--surface-alt);
 }
 
 .cards-grid {
@@ -222,19 +472,70 @@ body {
 .feature-card {
     min-height: 130px;
     padding: 0.6rem;
-    border: 2px solid #dddbd7;
+    border: 2px solid var(--border);
     border-radius: 8px;
-    color: #222;
+    background-color: var(--surface);
+    color: var(--text);
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.feature-card > i:first-child {
+/* Cards lift and tilt slightly on hover; the icon gives a little wiggle */
+.feature-card,
+.recipe-card {
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.6s ease var(--reveal-delay, 0s),
+        translate 0.6s ease var(--reveal-delay, 0s);
+}
+
+.feature-card:hover,
+.feature-card:focus-visible,
+.recipe-card:hover {
+    transform: translateY(-6px) rotate(-0.6deg);
+    border-color: var(--accent);
+    box-shadow: 0 12px 24px var(--menu-shadow);
+}
+
+.feature-card:focus-visible {
+    outline: none;
+}
+
+.feature-card:hover > svg:first-child,
+.feature-card:focus-visible > svg:first-child {
+    animation: card-wiggle 0.5s ease;
+}
+
+@keyframes card-wiggle {
+    0%, 100% { transform: rotate(0); }
+    30%      { transform: rotate(-14deg); }
+    60%      { transform: rotate(10deg); }
+}
+
+/* Fade up when scrolled into view (classes added by animations.js) */
+.reveal {
+    opacity: 0;
+    translate: 0 18px;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.stat.reveal {
+    transition: opacity 0.6s ease var(--reveal-delay, 0s), translate 0.6s ease var(--reveal-delay, 0s);
+}
+
+.feature-card > i:first-child,
+.feature-card > svg:first-child {
     width: 24px;
     height: 24px;
-    color: #31513a;
+    color: var(--brand);
 }
 
 .feature-card h2 {
@@ -253,81 +554,198 @@ body {
     align-self: flex-end;
 }
 
+/* Featured recipes section */
+.feature-recipes {
+    padding: 2rem 1.5rem;
+    background: var(--surface-alt);
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+}
+
+.recipe-card {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--border);
+    border-radius: 8px;
+    padding-top: 0.6rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 0.6rem;
+    background-color: var(--surface);
+}
+.recipe-card .card-arrow {
+    width: 24px;
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.recipe-card h3 {
+    margin: 0.4rem 0 0.25rem;
+    font-size: 1rem;
+}
+
+.recipe-card p {
+    margin: 0;
+    line-height: 1.25;
+}
+
+.recipe-card a {
+    margin-top: auto;
+    align-self: center;
+    color: var(--link);
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    padding: 1rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--link);
+}
+
+
+/* Placeholder cards that shimmer while recipes are loading */
+.recipe-card.is-loading {
+    gap: 0.6rem;
+    pointer-events: none;
+}
+
+.recipe-card.is-loading:hover {
+    transform: none;
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+.skeleton {
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--surface-alt) 0%, var(--border) 50%, var(--surface-alt) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s linear infinite;
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 140px;
+}
+
+.skeleton-line {
+    width: 80%;
+    height: 12px;
+}
+
+.skeleton-line--short {
+    width: 50%;
+}
+
+.skeleton-button {
+    width: 45%;
+    height: 28px;
+    margin-top: auto;
+    align-self: center;
+    border-radius: 14px;
+}
+
+@keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
+/* No motion for people who turn off animations in their device settings */
+@media (prefers-reduced-motion: reduce) {
+    .hero::before,
+    .skeleton,
+    .feature-card:hover > svg:first-child {
+        animation: none;
+    }
+
+    .feature-card:hover,
+    .feature-card:focus-visible,
+    .recipe-card:hover {
+        transform: none;
+    }
+}
+
+/** Error banner styles */
+#error-banner {
+    display: none;
+    background-color: #dba6a6;
+    color: rgb(155, 4, 4);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 10px;
+}
+
 /* Responsive card grid breakpoints */
 @media (max-width: 800px) {
-    .cards-grid {
+    .cards-grid,
+    .recipes-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 500px) {
-    .cards-grid {
+    .cards-grid,
+    .recipes-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Recipes search and filters stack neatly on phones */
+@media (max-width: 700px) {
+    .recipes-search {
+        padding: 0 1rem 1rem;
+        gap: 0.75rem;
+    }
+
+    .recipes-search-bar {
+        width: 100%;
+        margin: 1rem 0 0;
+    }
+
+    .recipes-filter {
+        flex: 1 1 140px;
+        width: auto;
+        margin: 0;
+    }
+
+    .recipes-search-button {
+        margin: 0;
     }
 }
 
 /* Small-screen navbar layout */
 @media (max-width: 600px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-        padding: 0.25rem;
-        padding-top: 30px;
-        gap: 0.2rem;
-    }
-
-    .nav-links {
-        justify-content: center;
-        gap: 0.2rem;
-        width: 100%;
-    }
-
-    .nav-links li {
-        padding: 0;
-    }
-
-    .nav-links li a {
-        font-size: 0.55rem;
-    }
-
-    .nav-links li a i {
-        display: none;
-    }
-
-    .navbar .logo {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .navbar .logo h2 {
-        font-size: 0.7rem;
-    }
-
-    .navbar .logo img {
-        height: 25px;
-        width: 25px;
-    }
     .hero{
-        background-size:cover;
         padding: 3rem 1.5rem;
        aspect-ratio: auto;
+    }
+
+    .hero::before {
+        background-size: cover;
     }
 }
 /* Large monitors: cap the hero height and scale up the hero content */
 @media (min-width: 1921px) {
-    
-    .nav-links {
-    gap: 3.5rem;
-    }
-
-    .nav-links li {
-    padding: 0.25rem 7.25rem;
-    }
     .hero {
         aspect-ratio: auto;
         height: 1100px;
+    }
+
+    .hero::before {
         background-size: cover;
-        background-position: center 65%;;
     }
 
     .hero h1 {
@@ -379,8 +797,481 @@ body {
     .hero-recipes {
         aspect-ratio: auto;
         min-height: 220px;
+    }
     .search-bar button svg {
         width: 28px;
         height: 28px;
     }
+    
+}
+
+
+/* ===== Navbar buttons ===== */
+.menu-toggle {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--control-border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--nav-text);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.menu-toggle:hover {
+    background-color: var(--control-hover);
+    border-color: var(--nav-text);
+    color: var(--nav-text-strong);
+}
+
+.menu-toggle:focus-visible {
+    outline: 2px solid var(--nav-text-strong);
+    outline-offset: 2px;
+}
+
+.menu-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== Navbar on smaller screens ===== */
+/* The menu button only appears on phones */
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle .icon-close,
+.navbar.menu-open .menu-toggle .icon-open {
+    display: none;
+}
+
+.navbar.menu-open .menu-toggle .icon-close {
+    display: block;
+}
+
+/* Tight on space: drop the link icons and keep the words */
+@media (min-width: 701px) and (max-width: 950px) {
+    .nav-links li a svg {
+        display: none;
+    }
+}
+
+/* Phones: one slim row, with the links in a drop-down menu */
+@media (max-width: 700px) {
+    .navbar {
+        grid-template-columns: 1fr auto;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .navbar .logo img {
+        height: 36px;
+        width: 36px;
+    }
+
+    .menu-toggle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .menu-toggle {
+        display: grid;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 3px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background-color: inherit;
+        box-shadow: 0 8px 16px var(--nav-shadow);
+    }
+
+    .navbar.menu-open .nav-links {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 0;
+    }
+
+    .nav-links li a {
+        padding: 0.8rem 1.25rem;
+        font-size: 1rem;
+        gap: 12px;
+    }
+
+    .nav-links li a::after {
+        display: none;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a[aria-current="page"] {
+        background-color: var(--control-hover);
+    }
+
+    .nav-links li a[aria-current="page"] {
+        color: var(--accent-text);
+    }
+}
+
+/* ===== Profile button and menu ===== */
+.profile {
+    position: relative;
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.profile-button:hover,
+.profile.open .profile-button {
+    border-color: var(--accent);
+}
+
+.profile-button:active {
+    transform: scale(0.94);
+}
+
+.profile-button:focus-visible {
+    outline: 2px solid var(--nav-text-strong);
+    outline-offset: 2px;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--brand);
+    color: var(--surface);
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+}
+
+.profile-avatar svg {
+    width: 60%;
+    height: 60%;
+}
+
+.profile-avatar--large {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+/* The menu drops down from the avatar with a quick fade and scale */
+.profile-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    width: 280px;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background-color: var(--surface);
+    color: var(--text);
+    box-shadow: 0 14px 32px var(--menu-shadow);
+    z-index: 200;
+    transform-origin: top right;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.96);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+
+/* Small arrow pointing up at the avatar */
+.profile-menu::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--surface);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    transform: rotate(45deg);
+}
+
+.profile.open .profile-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.2), visibility 0s;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.5rem 0.75rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.profile-details strong,
+.profile-details span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-details span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.profile-header--guest .profile-details span {
+    white-space: normal;
+}
+
+.profile-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.65rem;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.95rem;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.profile-item:hover,
+.profile-item:focus-visible {
+    background-color: var(--control-hover);
+    outline: none;
+}
+
+.profile-item:hover svg,
+.profile-item:focus-visible svg {
+    color: var(--accent-text);
+    transform: translateX(2px);
+}
+
+.profile-item--danger,
+.profile-item--danger svg,
+.profile-item--danger:hover svg {
+    color: var(--danger);
+}
+
+/* Items slide in one after another when the menu opens */
+.profile-item,
+.profile-actions {
+    opacity: 0;
+    transform: translateY(-4px);
+}
+
+.profile.open .profile-item,
+.profile.open .profile-actions {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.15s;
+    transition-delay: calc(var(--item-index, 0) * 25ms);
+}
+
+.profile-divider {
+    height: 1px;
+    margin: 0.35rem 0.25rem;
+    background-color: var(--border);
+}
+
+/* On/off switch for dark mode inside the menu */
+.profile-switch {
+    position: relative;
+    width: 34px;
+    height: 20px;
+    margin-left: auto;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background-color: var(--border);
+    transition: background-color 0.2s;
+}
+
+.profile-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+[aria-checked="true"] > .profile-switch {
+    background-color: var(--accent);
+}
+
+[aria-checked="true"] > .profile-switch::after {
+    transform: translateX(14px);
+}
+
+/* Logged-out state: log in and create account buttons */
+.profile-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.profile-action {
+    flex: 1;
+    padding: 0.55rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: filter 0.2s, background-color 0.2s;
+}
+
+.profile-action:hover,
+.profile-action:focus-visible {
+    background-color: var(--control-hover);
+    outline: none;
+}
+
+.profile-action--primary {
+    border-color: var(--button-bg);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.profile-action--primary:hover,
+.profile-action--primary:focus-visible {
+    background-color: var(--button-bg);
+    filter: brightness(1.15);
+}
+
+/* Short message that pops up at the bottom, like "Settings is coming soon" */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 9000;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    background-color: var(--text);
+    color: var(--page-bg);
+    font-size: 0.9rem;
+    box-shadow: 0 8px 20px var(--menu-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 16px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* Phones: the menu spans the screen under the header */
+@media (max-width: 700px) {
+    .profile {
+        position: static;
+    }
+
+    .profile-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .profile-menu {
+        top: calc(100% + 11px);
+        left: 0.75rem;
+        right: 0.75rem;
+        width: auto;
+    }
+
+    .profile-menu::before {
+        display: none;
+    }
+}
+
+/* Very small phones: tighten the header so all three buttons fit */
+@media (max-width: 380px) {
+    .navbar .logo h2 {
+        font-size: 1rem;
+    }
+
+    .nav-controls {
+        gap: 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-menu,
+    .profile.open .profile-menu,
+    .profile-item,
+    .profile.open .profile-item,
+    .profile-actions,
+    .profile.open .profile-actions,
+    .toast {
+        transform: none;
+        transition-duration: 0s;
+        transition-delay: 0s;
+    }
+}
+
+/* ===== 404 Page ===== */
+.not-found {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.not-found h1 {
+    font-size: 80px;
+    margin: 0;
+}
+
+.not-found a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    border-radius: 6px;
 }

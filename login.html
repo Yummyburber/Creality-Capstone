@@ -1,18 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIY Budget Meal Creator</title>
+
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="loader.css">
 </head>
 
 <body>
+
     <script src="loader.js"></script>
 
     <main class="auth-container">
-
         <div class="auth-card">
 
             <div class="logo">
@@ -24,6 +26,7 @@
             <section id="login-section" class="form-section active">
 
                 <h2>Welcome Back!</h2>
+
                 <p class="form-description">
                     Log in to create and save your budget-friendly meals.
                 </p>
@@ -52,6 +55,12 @@
                         >
                     </div>
 
+                    <p class="forgot-password">
+                        <button type="button" id="show-forgot">
+                            Forgot Password?
+                        </button>
+                    </p>
+
                     <button type="submit" class="submit-btn">
                         Log In
                     </button>
@@ -67,11 +76,11 @@
 
             </section>
 
-
             <!-- Signup Form -->
             <section id="signup-section" class="form-section">
 
                 <h2>Create an Account</h2>
+
                 <p class="form-description">
                     Sign up to start creating affordable meals.
                 </p>
@@ -107,6 +116,7 @@
                             id="signup-password"
                             name="password"
                             placeholder="Create a password"
+                            minlength="8"
                             required
                         >
                     </div>
@@ -137,14 +147,50 @@
 
             </section>
 
-        </div>
+            <!-- Forgot Password Form -->
+            <section id="forgot-section" class="form-section">
 
+                <h2>Reset Your Password</h2>
+
+                <p class="form-description">
+                    Enter your email address and we'll send you a password-reset link.
+                </p>
+
+                <form id="forgot-form">
+
+                    <div class="form-group">
+                        <label for="forgot-email">Email</label>
+                        <input
+                            type="email"
+                            id="forgot-email"
+                            placeholder="Enter your registered email"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Send Reset Link
+                    </button>
+
+                </form>
+
+                <p class="toggle-text">
+                    Remember your password?
+                    <button type="button" id="back-to-login" class="toggle-btn">
+                        Log In
+                    </button>
+                </p>
+
+            </section>
+
+        </div>
     </main>
 
+    <!-- Scripts must load in this order -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
     <script src="theme.js"></script>
     <script src="script.js"></script>
-    
+
 </body>
 </html>

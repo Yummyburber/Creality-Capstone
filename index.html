@@ -27,8 +27,8 @@
                 <li><a href="index.html" aria-current="page"><i data-lucide="house"></i>Home</a></li>
                 <li><a href="recipes.html"><i data-lucide="utensils"></i>Recipes</a></li>
                 <li><a href="create.html"><i data-lucide="plus"></i>Create</a></li>
-                <li><a href="Pantry.html"><i data-lucide="can"></i>Pantry</a></li>
-                <li><a href="meal-plan.html"><i data-lucide="cooking-pot"></i>  Meal Plan</a></li>
+                <li><a href="pantry.html"><i data-lucide="can"></i>Pantry</a></li>
+                <li><a href="mealPlan.html"><i data-lucide="cooking-pot"></i>Meal Plan</a></li>
             </ul>
             <div class="nav-controls">
                 <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -111,8 +111,16 @@
         <a href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by amonrat rungreangfangsai - Flaticon</a>
         <p>Icons by Lucide</p>
        </footer> 
+
+
+        <!-- Load Supabase before the profile menu -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="supabaseClient.js"></script>
+
+        <!-- Profile and theme functionality -->
         <script src="profile.js"></script>
         <script src="theme.js"></script>
+
         <script>
             lucide.createIcons();
         </script>

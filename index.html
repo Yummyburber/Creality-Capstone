@@ -2,8 +2,6 @@
 <html lang="en">
     <head>
 
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DIY Meal Maker</title>
@@ -12,25 +10,31 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Edu+QLD+Hand:wght@400..700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="loader.css">
+        <script src="homepage.js" defer></script>
+        <script src="animations.js" defer></script>
     </head>
 
     <body>
+        <script src="loader.js"></script>
         <header>
         <nav class="navbar">
-            <div class="logo">
-                <img src="Images/hot-pot (1).png" alt="Hot Pot">
+            <a class="logo" href="index.html" aria-label="Meal Maker, go to the homepage">
+                <img src="Images/hot-pot (1).png" alt="">
                 <h2>Meal Maker</h2>
-            </div>
+            </a>
             <ul class="nav-links">
-                <li><a href="index.html"><i data-lucide="house"></i>Home</a></li>
+                <li><a href="index.html" aria-current="page"><i data-lucide="house"></i>Home</a></li>
                 <li><a href="recipes.html"><i data-lucide="utensils"></i>Recipes</a></li>
                 <li><a href="create.html"><i data-lucide="plus"></i>Create</a></li>
                 <li><a href="Pantry.html"><i data-lucide="can"></i>Pantry</a></li>
                 <li><a href="meal-plan.html"><i data-lucide="cooking-pot"></i>  Meal Plan</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="#" aria-label = "Profile">Profile </a>
-                <button type="button" aria-label="Toggle light, dark mode"><i data-lucide="sun"></i></button>
+            <div class="nav-controls">
+                <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+                    <i class="icon-open" data-lucide="menu"></i>
+                    <i class="icon-close" data-lucide="x"></i>
+                </button>
             </div>
         </nav>
        </header>
@@ -38,8 +42,8 @@
 
         <section class="hero">
             <h1>
-                <span>Cook Something</span>
-                <span class="title-line"><span class="hero-highlight">Great</span> today</span>
+                <span><span class="word">Cook</span> <span class="word">Something</span></span>
+                <span class="title-line"><span class="word hero-highlight">Great</span> <span class="word">today</span></span>
             </h1>
             <p><em>Good food. Less money. Your way.</em></p>
             <form class="search-bar">
@@ -49,45 +53,73 @@
             </form>
             
         </section>
+        <!-- PLACEHOLDER NUMBERS: replace data-count (and the text) with real figures before launch -->
+        <section class="stats" aria-label="Meal Maker in numbers">
+            <div class="stat">
+                <span class="stat-number" data-count="1240">1,240</span>
+                <span class="stat-label">recipes to explore</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-count="4.5" data-decimals="2" data-prefix="$">$4.50</span>
+                <span class="stat-label">average cost per meal</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-count="25" data-suffix=" min">25 min</span>
+                <span class="stat-label">average cooking time</span>
+            </div>
+        </section>
         <section class="cards-section">
             <div class="cards-grid">
-    <a class="feature-card" href="recipes.html">
+   
+        <a class="feature-card" href="recipes.html">
         <i data-lucide="chef-hat"></i>
         <h2>Find Recipes</h2>
         <p>Browse budget-friendly recipes, filtered by your preferences.</p>
         <i class="card-arrow" data-lucide="arrow-right"></i>
-    </a>
+     </a>
 
-    <a class="feature-card" href="create.html">
+     
+
+        <a class="feature-card" href="create.html">
         <i data-lucide="pencil"></i>
         <h2>Create Your Own</h2>
         <p>Build a custom recipe, save it, and keep it for later.</p>
         <i class="card-arrow" data-lucide="arrow-right"></i>
-    </a>
+     </a>
 
-    <a class="feature-card" href="pantry.html">
+        <a class="feature-card" href="pantry.html">
         <i data-lucide="shopping-basket"></i>
         <h2>Get Ingredients</h2>
         <p>See what you need and where to find it, with estimated prices.</p>
         <i class="card-arrow" data-lucide="arrow-right"></i>
-    </a>
+     </a>
 
-    <a class="feature-card" href="mealPlan.html">
+     
+
+        <a class="feature-card" href="mealPlan.html">
         <i data-lucide="circle-dollar-sign"></i>
         <h2>Stay on Budget</h2>
         <p>Cook delicious meals without breaking the bank.</p>
         <i class="card-arrow" data-lucide="arrow-right"></i>
-    </a>
-</div>
+     </a>
+       
+        </div>
         </section>
         </main>
        <footer>
         <p>&copy; 2026 DIY Meal Maker. All rights reserved.</p> 
         <a href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by amonrat rungreangfangsai - Flaticon</a>
         <p>Icons by Lucide</p>
-       </footer>  
+       </footer> 
+        <!-- Load Supabase before the profile menu -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="supabaseClient.js"></script>
+        <!-- Existing homepage scripts -->
+        <script src="profile.js"></script>
+        <script src="theme.js"></script>
         <script>
             lucide.createIcons();
         </script>
+
     </body>
 </html>

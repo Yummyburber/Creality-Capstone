@@ -1,9 +1,6 @@
-// Profile button and menu in the navbar.
-// Front end only for now: the account details below are placeholders until
-// the login is connected to the database.
+// Profile button and menu in the navbar connected to Supabase Auth.
 (function () {
-    const placeholderUser = { name: "Your Name", email: "you@example.com" };
-    let currentUser = placeholderUser;
+    let currentUser = null;
 
     const controls = document.querySelector(".nav-controls");
     if (!controls) {
@@ -23,7 +20,6 @@
     const avatar = profile.querySelector(".profile-avatar");
     const menu = profile.querySelector(".profile-menu");
 
-    // Names and emails will come from the database later, so treat them as plain text
     function escapeText(text) {
         const holder = document.createElement("span");
         holder.textContent = text;
@@ -31,7 +27,20 @@
     }
 
     function initials(name) {
-        return name.split(" ").map(function (word) { return word[0]; }).join("").slice(0, 2).toUpperCase();
+        return name.trim().split(/\s+/).map(function (word) { return word[0]; }).join("").slice(0, 2).toUpperCase() || "U";
+    }
+
+    function formatSupabaseUser(user) {
+        if (!user) {
+            return null;
+        }
+        const metaName = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
+        const fallbackName = user.email ? user.email.split("@")[0] : "Member";
+        return {
+            id: user.id,
+            name: metaName || fallbackName,
+            email: user.email || ""
+        };
     }
 
     function item(icon, label, options) {
@@ -91,7 +100,6 @@
                 item("circle-help", "Help and feedback", { action: "soon" });
         }
 
-        // Each item fades in slightly after the one before it
         menu.querySelectorAll("[role^='menuitem']").forEach(function (element, index) {
             element.style.setProperty("--item-index", index);
         });
@@ -107,7 +115,6 @@
     }
 
     function setOpen(isOpen) {
-        // The saved theme is applied after this menu is built, so refresh the switch on open
         if (isOpen) {
             syncDarkModeItem();
         }
@@ -120,13 +127,14 @@
         const willOpen = !profile.classList.contains("open");
         setOpen(willOpen);
 
-        // Only one drop-down at a time: close the phone navigation menu
         if (willOpen && typeof window.setMenuOpen === "function") {
             window.setMenuOpen(false);
         }
-        // Opened with the keyboard: move focus into the menu
         if (willOpen && event.detail === 0) {
-            menuItems()[0].focus();
+            const firstItem = menuItems()[0];
+            if (firstItem) {
+                firstItem.focus();
+            }
         }
     });
 
@@ -143,7 +151,6 @@
         }
     });
 
-    // Escape closes the menu, arrow keys move between items
     profile.addEventListener("keydown", function (event) {
         if (!profile.classList.contains("open")) {
             return;
@@ -163,7 +170,7 @@
         }
     });
 
-    menu.addEventListener("click", function (event) {
+    menu.addEventListener("click", async function (event) {
         const target = event.target.closest("[data-action]");
         if (!target) {
             return;
@@ -171,7 +178,6 @@
         const action = target.dataset.action;
 
         if (action === "theme") {
-            // The theme logic lives in theme.js
             if (typeof window.toggleTheme === "function") {
                 window.toggleTheme();
             }
@@ -183,10 +189,16 @@
         if (action === "soon") {
             showToast(target.textContent.trim() + " is coming soon");
         } else if (action === "logout") {
-            // Demo only: nothing is connected yet, so just show the logged-out menu
+            if (typeof _supabase !== "undefined") {
+                const { error } = await _supabase.auth.signOut();
+                if (error) {
+                    showToast("Could not log out: " + error.message);
+                    return;
+                }
+            }
             currentUser = null;
             render();
-            showToast("Logged out (preview only)");
+            showToast("Logged out");
         }
     });
 
@@ -215,5 +227,25 @@
         }, 2500);
     }
 
-    render();
+    async function initAuthState() {
+        render(); // Render guest state immediately so there is no layout delay
+
+        if (typeof _supabase === "undefined") {
+            console.warn("_supabase is not loaded; profile menu stays in guest mode.");
+            return;
+        }
+
+        const { data: { user }, error } = await _supabase.auth.getUser();
+        if (!error && user) {
+            currentUser = formatSupabaseUser(user);
+            render();
+        }
+
+        _supabase.auth.onAuthStateChange(function (_event, session) {
+            currentUser = formatSupabaseUser(session ? session.user : null);
+            render();
+        });
+    }
+
+    initAuthState();
 })();

@@ -1,83 +1,197 @@
-// Get login and signup sections
-const loginSection = document.getElementById("login-section");
-const signupSection = document.getElementById("signup-section");
 
-// Get toggle buttons
-const showSignupButton = document.getElementById("show-signup");
-const showLoginButton = document.getElementById("show-login");
+document.addEventListener("DOMContentLoaded", function () {
 
-// Show Signup Form
-showSignupButton.addEventListener("click", function () {
-    loginSection.classList.remove("active");
-    signupSection.classList.add("active");
-});
+    // Get Supabase client
+    const supabase = window._supabase;
 
-// Show Login Form
-showLoginButton.addEventListener("click", function () {
-    signupSection.classList.remove("active");
-    loginSection.classList.add("active");
-});
+    // Get form sections
+    const loginSection = document.getElementById("login-section");
+    const signupSection = document.getElementById("signup-section");
+    const forgotSection = document.getElementById("forgot-section");
 
-// SUPABASE LOGIN BEHAVIOR
-document.getElementById("login-form").addEventListener("submit", async function (event) {
-    // Prevent the browser from refreshing the page automatically on submit
-    event.preventDefault();
+    // Check Supabase only when authentication is needed
+    function getSupabase() {
+        if (!supabase) {
+            alert("Authentication service is unavailable. Please try again later.");
+            console.error("Supabase client was not initialized.");
+            return null;
+        }
 
-    // Grab the email and password values typed into the input fields
-    const email = document.getElementById("login-email").value.trim().toLowerCase();
-    const password = document.getElementById("login-password").value;
+        return supabase;
+    }
 
-    // Call Supabase's built-in method to check user credentials
-    const { data, error } = await _supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
+    // Show one form section at a time
+    function showSection(section) {
+        [loginSection, signupSection, forgotSection].forEach(function (item) {
+            if (item) {
+                item.classList.remove("active");
+            }
+        });
+
+        if (section) {
+            section.classList.add("active");
+        }
+    }
+
+    // FORM NAVIGATION
+
+    document.getElementById("show-signup")?.addEventListener("click", function () {
+        showSection(signupSection);
     });
 
-    // If Supabase returns an error (wrong password, user doesn't exist, etc.)
-    if (error) {
-        alert("Error logging in: " + error.message);
-    } else {
-        // Success! Redirect straight to main app page
-        window.location.href = "index.html";
-    }
-});
+    document.getElementById("show-login")?.addEventListener("click", function () {
+        showSection(loginSection);
+    });
 
-// SUPABASE SIGN UP BEHAVIOR
-document.getElementById("signup-form").addEventListener("submit", async function (event) {
-    // Prevent the default page reload
-    event.preventDefault();
+    document.getElementById("show-forgot")?.addEventListener("click", function () {
+        showSection(forgotSection);
+    });
 
-    // Grab all input values from the signup form
-    const name = document.getElementById("signup-name").value.trim();
-    const email = document.getElementById("signup-email").value.trim().toLowerCase();
-    const password = document.getElementById("signup-password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
+    document.getElementById("back-to-login")?.addEventListener("click", function () {
+        showSection(loginSection);
+    });
 
-    // Client-side validation: Make sure passwords match before hitting the backend
-    if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
-    }
+    // LOGIN
 
-    // Call Supabase's built-in method to create a new user in auth.users
-    const { data, error } = await _supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: {
-                full_name: name // Pass extra metadata like the user's name
+    document.getElementById("login-form")?.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const authClient = getSupabase();
+        if (!authClient) return;
+
+        const email = document.getElementById("login-email").value.trim().toLowerCase();
+        const password = document.getElementById("login-password").value;
+
+        const button = event.target.querySelector(".submit-btn");
+        button.disabled = true;
+        button.textContent = "Logging in...";
+
+        try {
+            const { error } = await authClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                alert("Error logging in: " + error.message);
+                return;
             }
+
+            window.location.href = "index.html";
+
+        } catch (error) {
+            alert("Something went wrong while logging in.");
+            console.error(error);
+
+        } finally {
+            button.disabled = false;
+            button.textContent = "Log In";
         }
     });
 
-    // If Supabase returns an error (e.g., email already taken)
-    if (error) {
-        alert("Error signing up: " + error.message);
-    } else {
-        // Success! The user is now registered in your Supabase Auth dashboard
-        alert("Account created successfully!");
-        
-        // Redirect them to index.html
-        window.location.href = "index.html";
-    }
+    // SIGNUP
+
+    document.getElementById("signup-form")?.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const authClient = getSupabase();
+        if (!authClient) return;
+
+        const name = document.getElementById("signup-name").value.trim();
+        const email = document.getElementById("signup-email").value.trim().toLowerCase();
+        const password = document.getElementById("signup-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        if (password.length < 8) {
+            alert("Your password must be at least 8 characters long.");
+            return;
+        }
+
+        const button = event.target.querySelector(".submit-btn");
+        button.disabled = true;
+        button.textContent = "Creating account...";
+
+        try {
+            const { data, error } = await authClient.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: {
+                        full_name: name
+                    },
+                    emailRedirectTo: new URL("index.html", window.location.href).href
+                }
+            });
+
+            if (error) {
+                alert("Error signing up: " + error.message);
+                return;
+            }
+
+            event.target.reset();
+
+            if (data.session) {
+                alert("Account created successfully!");
+                window.location.href = "index.html";
+            } else {
+                alert("Account created! Check your email to verify your account before logging in.");
+                showSection(loginSection);
+            }
+
+        } catch (error) {
+            alert("Something went wrong while creating your account.");
+            console.error(error);
+
+        } finally {
+            button.disabled = false;
+            button.textContent = "Sign Up";
+        }
+    });
+
+    // FORGOT PASSWORD
+
+    document.getElementById("forgot-form")?.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const authClient = getSupabase();
+        if (!authClient) return;
+
+        const email = document.getElementById("forgot-email").value.trim().toLowerCase();
+
+        const button = event.target.querySelector(".submit-btn");
+        button.disabled = true;
+        button.textContent = "Sending...";
+
+        try {
+            const redirectUrl = new URL("reset-password.html", window.location.href).href;
+
+            const { error } = await authClient.auth.resetPasswordForEmail(email, {
+                redirectTo: redirectUrl
+            });
+
+            if (error) {
+                alert("Unable to send reset email: " + error.message);
+                return;
+            }
+
+            alert("If the account is eligible, a password-reset email will be sent. Check your inbox.");
+
+            event.target.reset();
+            showSection(loginSection);
+
+        } catch (error) {
+            alert("Something went wrong while requesting a password reset.");
+            console.error(error);
+
+        } finally {
+            button.disabled = false;
+            button.textContent = "Send Reset Link";
+        }
+    });
+
 });

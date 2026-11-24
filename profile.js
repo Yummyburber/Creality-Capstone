@@ -1,3 +1,6 @@
+// Profile button and menu in the navbar connected to Supabase Auth.
+(function () {
+    let currentUser = null;
 // Profile button and menu connected to Supabase
 (function () {
 
@@ -39,6 +42,20 @@
     }
 
     function initials(name) {
+        return name.trim().split(/\s+/).map(function (word) { return word[0]; }).join("").slice(0, 2).toUpperCase() || "U";
+    }
+
+    function formatSupabaseUser(user) {
+        if (!user) {
+            return null;
+        }
+        const metaName = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
+        const fallbackName = user.email ? user.email.split("@")[0] : "Member";
+        return {
+            id: user.id,
+            name: metaName || fallbackName,
+            email: user.email || ""
+        };
         return (name || "User")
             .trim()
             .split(/\s+/)
@@ -184,6 +201,10 @@
         if (willOpen && typeof window.setMenuOpen === "function") {
             window.setMenuOpen(false);
         }
+        if (willOpen && event.detail === 0) {
+            const firstItem = menuItems()[0];
+            if (firstItem) {
+                firstItem.focus();
 
         if (willOpen && event.detail === 0) {
             const items = menuItems();
@@ -261,6 +282,16 @@
             showToast(target.textContent.trim() + " is coming soon");
 
         } else if (action === "logout") {
+            if (typeof _supabase !== "undefined") {
+                const { error } = await _supabase.auth.signOut();
+                if (error) {
+                    showToast("Could not log out: " + error.message);
+                    return;
+                }
+            }
+            currentUser = null;
+            render();
+            showToast("Logged out");
 
             if (!supabase) {
                 showToast("Supabase is not available.");
@@ -317,6 +348,22 @@
         }, 2500);
     }
 
+    async function initAuthState() {
+        render(); // Render guest state immediately so there is no layout delay
+
+        if (typeof _supabase === "undefined") {
+            console.warn("_supabase is not loaded; profile menu stays in guest mode.");
+            return;
+        }
+
+        const { data: { user }, error } = await _supabase.auth.getUser();
+        if (!error && user) {
+            currentUser = formatSupabaseUser(user);
+            render();
+        }
+
+        _supabase.auth.onAuthStateChange(function (_event, session) {
+            currentUser = formatSupabaseUser(session ? session.user : null);
     // Load the real signed-in user
     async function loadUser() {
 
@@ -365,4 +412,5 @@
         });
     }
 
+    initAuthState();
 })();

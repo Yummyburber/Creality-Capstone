@@ -1,6 +1,3 @@
-// Profile button and menu in the navbar connected to Supabase Auth.
-(function () {
-    let currentUser = null;
 // Profile button and menu connected to Supabase
 (function () {
 
@@ -42,20 +39,6 @@
     }
 
     function initials(name) {
-        return name.trim().split(/\s+/).map(function (word) { return word[0]; }).join("").slice(0, 2).toUpperCase() || "U";
-    }
-
-    function formatSupabaseUser(user) {
-        if (!user) {
-            return null;
-        }
-        const metaName = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
-        const fallbackName = user.email ? user.email.split("@")[0] : "Member";
-        return {
-            id: user.id,
-            name: metaName || fallbackName,
-            email: user.email || ""
-        };
         return (name || "User")
             .trim()
             .split(/\s+/)
@@ -65,6 +48,22 @@
             .join("")
             .slice(0, 2)
             .toUpperCase();
+    }
+
+    // Turn a Supabase user into the name and email shown in the menu
+    function formatSupabaseUser(user) {
+        if (!user) {
+            return null;
+        }
+
+        const metadata = user.user_metadata || {};
+        const fallbackName = user.email ? user.email.split("@")[0] : "Member";
+
+        return {
+            id: user.id,
+            name: metadata.full_name || metadata.name || fallbackName,
+            email: user.email || ""
+        };
     }
 
     function item(icon, label, options) {
@@ -201,10 +200,6 @@
         if (willOpen && typeof window.setMenuOpen === "function") {
             window.setMenuOpen(false);
         }
-        if (willOpen && event.detail === 0) {
-            const firstItem = menuItems()[0];
-            if (firstItem) {
-                firstItem.focus();
 
         if (willOpen && event.detail === 0) {
             const items = menuItems();
@@ -282,16 +277,6 @@
             showToast(target.textContent.trim() + " is coming soon");
 
         } else if (action === "logout") {
-            if (typeof _supabase !== "undefined") {
-                const { error } = await _supabase.auth.signOut();
-                if (error) {
-                    showToast("Could not log out: " + error.message);
-                    return;
-                }
-            }
-            currentUser = null;
-            render();
-            showToast("Logged out");
 
             if (!supabase) {
                 showToast("Supabase is not available.");
@@ -348,22 +333,6 @@
         }, 2500);
     }
 
-    async function initAuthState() {
-        render(); // Render guest state immediately so there is no layout delay
-
-        if (typeof _supabase === "undefined") {
-            console.warn("_supabase is not loaded; profile menu stays in guest mode.");
-            return;
-        }
-
-        const { data: { user }, error } = await _supabase.auth.getUser();
-        if (!error && user) {
-            currentUser = formatSupabaseUser(user);
-            render();
-        }
-
-        _supabase.auth.onAuthStateChange(function (_event, session) {
-            currentUser = formatSupabaseUser(session ? session.user : null);
     // Load the real signed-in user
     async function loadUser() {
 
@@ -374,21 +343,12 @@
 
         const { data, error } = await supabase.auth.getUser();
 
-        if (error) {
+        // Not being logged in is normal for guests, so only report other problems
+        if (error && error.name !== "AuthSessionMissingError") {
             console.error("Unable to load profile:", error.message);
         }
 
-        if (data && data.user) {
-            const user = data.user;
-
-            currentUser = {
-                name: user.user_metadata?.full_name || user.email?.split("@")[0] || "User",
-                email: user.email || ""
-            };
-        } else {
-            currentUser = null;
-        }
-
+        currentUser = formatSupabaseUser(data && data.user);
         render();
     }
 
@@ -397,20 +357,9 @@
 
     if (supabase) {
         supabase.auth.onAuthStateChange(function (_event, session) {
-
-            if (session && session.user) {
-                currentUser = {
-                    name: session.user.user_metadata?.full_name ||
-                        session.user.email?.split("@")[0] || "User",
-                    email: session.user.email || ""
-                };
-            } else {
-                currentUser = null;
-            }
-
+            currentUser = formatSupabaseUser(session ? session.user : null);
             render();
         });
     }
 
-    initAuthState();
 })();

@@ -1,5 +1,7 @@
 
-/* General Page Styling */
+/* =========================================
+   MEAL MAKER - AUTHENTICATION PAGE
+========================================= */
 
 * {
     box-sizing: border-box;
@@ -9,54 +11,133 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 15% 20%, rgba(226, 166, 92, 0.22), transparent 30%),
-        radial-gradient(circle at 85% 80%, rgba(104, 139, 92, 0.20), transparent 30%),
-        linear-gradient(135deg, #f8f1e5, #eee5d5);
-    color: #333;
+    color: #263326;
     min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 10% 15%, rgba(170, 211, 91, 0.35), transparent 35%),
+        radial-gradient(ellipse at 90% 85%, rgba(177, 215, 91, 0.35), transparent 35%),
+        linear-gradient(135deg, #579b35, #659f38 55%, #4d8c30);
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* Main Container */
+/* Decorative background curves */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+}
+
+body::before {
+    width: 420px;
+    height: 220px;
+    top: 5%;
+    left: -230px;
+    background: rgba(196, 226, 115, 0.24);
+    transform: rotate(25deg);
+}
+
+body::after {
+    width: 500px;
+    height: 250px;
+    right: -260px;
+    bottom: -100px;
+    background: rgba(196, 226, 115, 0.24);
+    transform: rotate(-25deg);
+}
+
+/* =========================================
+   OUTLINED FOOD INGREDIENT BACKGROUND
+========================================= */
+
+.background-art {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+}
+
+.background-art svg {
+    width: 100%;
+    height: 100%;
+}
+
+.ingredient-lines {
+    fill: none;
+    stroke: rgba(35, 82, 25, 0.55);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.ingredient-dots {
+    fill: rgba(35, 82, 25, 0.35);
+}
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
 
 .auth-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 35px 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Authentication Card */
+/* =========================================
+   AUTHENTICATION CARD
+========================================= */
 
 .auth-card {
     width: 100%;
-    max-width: 450px;
-    background-color: rgba(255, 255, 255, 0.96);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(80, 60, 35, 0.14);
+    max-width: 600px;
+    background: rgba(255, 255, 239, 0.96);
+    padding: 42px 48px;
+    border-radius: 27px;
+    box-shadow:
+        0 20px 55px rgba(31, 65, 24, 0.22),
+        0 3px 12px rgba(31, 65, 24, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
-/* Logo */
+/* =========================================
+   LOGO / BRANDING
+========================================= */
 
 .logo {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 38px;
 }
 
 .logo h1 {
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: #465b3c;
+    font-size: 36px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    margin-bottom: 9px;
+    color: #285d25;
 }
 
 .logo p {
-    color: #777;
-    font-size: 14px;
+    color: #62705a;
+    font-size: 18px;
 }
 
-/* Forms */
+/* =========================================
+   FORM SECTIONS
+========================================= */
 
 .form-section {
     display: none;
@@ -68,58 +149,72 @@ body {
 
 .form-section h2 {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 24px;
+    margin-bottom: 12px;
+    font-size: 32px;
+    color: #30352d;
 }
 
 .form-description {
     text-align: center;
-    color: #777;
-    margin-bottom: 25px;
-    font-size: 14px;
+    color: #687064;
+    margin-bottom: 28px;
+    font-size: 17px;
     line-height: 1.5;
 }
 
-/* Form Groups */
+/* =========================================
+   FORM GROUPS
+========================================= */
 
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 19px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 7px;
+    margin-bottom: 9px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 17px;
+    color: #285d25;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
+    padding: 16px 17px;
+    border: 1px solid #d8ddcf;
+    border-radius: 17px;
+    background-color: #fff;
+    color: #30352d;
+    font-size: 17px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #999e97;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #71865c;
-    box-shadow: 0 0 0 2px rgba(113, 134, 92, 0.15);
+    border-color: #619a43;
+    box-shadow: 0 0 0 4px rgba(97, 154, 67, 0.14);
 }
 
-/* Forgot Password */
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
 
 .forgot-password {
     text-align: right;
-    margin-top: -8px;
-    margin-bottom: 15px;
+    margin-top: -5px;
+    margin-bottom: 20px;
 }
 
 .forgot-password button {
     background: none;
     border: none;
-    color: #637d4d;
-    font-size: 13px;
+    color: #397c2e;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -127,90 +222,196 @@ body {
     text-decoration: underline;
 }
 
-/* Submit Button */
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
 
 .submit-btn {
     width: 100%;
-    padding: 13px;
+    padding: 17px;
     border: none;
-    border-radius: 6px;
-    background-color: #526b43;
-    color: white;
-    font-size: 16px;
+    border-radius: 18px;
+    background: linear-gradient(110deg, #ffd400, #ffcc00);
+    color: #24351e;
+    font-size: 19px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 3px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .submit-btn:hover {
-    background-color: #405635;
+    background: linear-gradient(110deg, #ffca00, #f6bd00);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(170, 135, 0, 0.2);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
 }
 
 .submit-btn:disabled {
     opacity: 0.65;
     cursor: not-allowed;
+    transform: none;
 }
 
-/* Login / Signup Toggle */
+/* =========================================
+   LOGIN / SIGNUP TOGGLE
+========================================= */
 
 .toggle-text {
     text-align: center;
-    margin-top: 22px;
-    font-size: 14px;
-    color: #666;
+    margin-top: 27px;
+    font-size: 16px;
+    color: #626b5d;
+    line-height: 1.6;
 }
 
 .toggle-btn {
     background: none;
     border: none;
-    color: #526b43;
+    color: #34752a;
     font-weight: bold;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .toggle-btn:hover {
     text-decoration: underline;
 }
 
-/* Mobile Responsive Styling */
+/* =========================================
+   ANIMATIONS
+========================================= */
 
-@media (max-width: 500px) {
-    .auth-container {
-        padding: 15px;
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
     }
 
-    .auth-card {
-        padding: 25px 20px;
-    }
-
-    .logo h1 {
-        font-size: 23px;
-    }
-
-    .form-section h2 {
-        font-size: 21px;
-    }
-
-    .form-group input {
-        padding: 11px;
-    }
-
-    .submit-btn {
-        padding: 12px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Dark Mode */
+.auth-card {
+    animation: cardFadeIn 0.55s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 25px 18px;
+    }
+
+    .auth-card {
+        max-width: 520px;
+        padding: 36px 32px;
+    }
+
+    .logo h1 {
+        font-size: 30px;
+    }
+
+    .form-section h2 {
+        font-size: 28px;
+    }
+
+    .background-art {
+        opacity: 0.4;
+    }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 500px) {
+    .auth-container {
+        padding: 18px 14px;
+    }
+
+    .auth-card {
+        padding: 30px 23px;
+        border-radius: 22px;
+    }
+
+    .logo {
+        margin-bottom: 30px;
+    }
+
+    .logo h1 {
+        font-size: 25px;
+    }
+
+    .logo p {
+        font-size: 15px;
+    }
+
+    .form-section h2 {
+        font-size: 24px;
+    }
+
+    .form-description {
+        font-size: 15px;
+        margin-bottom: 23px;
+    }
+
+    .form-group label {
+        font-size: 15px;
+    }
+
+    .form-group input {
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    .submit-btn {
+        padding: 14px;
+        font-size: 17px;
+    }
+
+    .toggle-text,
+    .toggle-btn {
+        font-size: 14px;
+    }
+
+    .background-art {
+        opacity: 0.25;
+    }
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
 
 body.dark {
-    background: #121a14;
+    background:
+        radial-gradient(ellipse at 10% 15%, rgba(65, 103, 48, 0.3), transparent 35%),
+        radial-gradient(ellipse at 90% 85%, rgba(65, 103, 48, 0.3), transparent 35%),
+        linear-gradient(135deg, #172619, #203821 55%, #172619);
     color: #e0e0e0;
 }
 
 body.dark .auth-card {
-    background-color: #1e2921;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(30, 41, 33, 0.97);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
 }
 
 body.dark .logo h1 {
@@ -220,29 +421,36 @@ body.dark .logo h1 {
 body.dark .logo p,
 body.dark .form-description,
 body.dark .toggle-text {
-    color: #aaa;
+    color: #b5c0ae;
+}
+
+body.dark .form-section h2 {
+    color: #edf2e8;
+}
+
+body.dark .form-group label {
+    color: #c3d5ad;
 }
 
 body.dark .form-group input {
     background-color: #2a352d;
     color: #e0e0e0;
-    border-color: #444;
+    border-color: #4b5c4d;
+}
+
+body.dark .form-group input::placeholder {
+    color: #a0aa9f;
 }
 
 body.dark .form-group input:focus {
     border-color: #9bb583;
 }
 
-body.dark .submit-btn {
-    background-color: #819b6b;
-    color: #121a14;
-}
-
-body.dark .submit-btn:hover {
-    background-color: #9bb583;
-}
-
 body.dark .toggle-btn,
 body.dark .forgot-password button {
     color: #b7d29c;
+}
+
+body.dark .background-art {
+    opacity: 0.25;
 }

@@ -14,9 +14,102 @@
 
     <script src="loader.js"></script>
 
+    <!-- Decorative ingredient background -->
+    <div class="background-art" aria-hidden="true">
+        <svg viewBox="0 0 1600 1000" preserveAspectRatio="none">
+
+            <g class="ingredient-lines">
+
+                <!-- Top left herb -->
+                <path d="M65 55 Q100 15 145 35 Q125 85 65 55Z"/>
+                <path d="M65 55 Q100 45 145 35"/>
+                <path d="M95 45 L85 25 M110 42 L115 20 M120 40 L140 55"/>
+
+                <!-- Top citrus -->
+                <circle cx="460" cy="65" r="52"/>
+                <circle cx="460" cy="65" r="39"/>
+                <path d="M460 26 L460 104 M422 65 L498 65 M433 38 L487 92 M487 38 L433 92"/>
+
+                <!-- Top right leaf -->
+                <path d="M1250 70 Q1300 5 1360 25 Q1335 95 1250 70Z"/>
+                <path d="M1250 70 L1360 25"/>
+                <path d="M1290 50 L1285 30 M1315 40 L1325 20"/>
+
+                <!-- Bell pepper -->
+                <path d="M1440 90 Q1430 55 1460 45 Q1490 20 1510 55 Q1545 40 1560 80 Q1580 155 1510 190 Q1440 185 1440 90Z"/>
+                <path d="M1490 55 Q1480 25 1500 15 Q1520 25 1510 55"/>
+                <path d="M1500 65 Q1480 110 1495 165"/>
+
+                <!-- Left tomato outline -->
+                <path d="M80 480 Q95 425 150 440 Q195 420 215 475 Q205 530 140 550 Q80 535 80 480Z"/>
+                <path d="M140 440 L140 420 L125 435 M140 420 L155 435 M140 420 L175 410"/>
+                <path d="M140 445 L115 465 M140 445 L170 465"/>
+
+                <!-- Right citrus -->
+                <circle cx="1370" cy="350" r="58"/>
+                <circle cx="1370" cy="350" r="43"/>
+                <path d="M1370 307 L1370 393 M1327 350 L1413 350 M1340 320 L1400 380 M1400 320 L1340 380"/>
+
+                <!-- Right leaf -->
+                <path d="M1480 510 Q1540 445 1590 470 Q1550 535 1480 510Z"/>
+                <path d="M1480 510 L1590 470"/>
+                <path d="M1515 495 L1510 470 M1540 485 L1545 465"/>
+
+                <!-- Bottom mushroom -->
+                <path d="M50 770 Q70 700 145 720 Q190 735 195 780 Q130 815 50 770Z"/>
+                <path d="M100 780 Q110 810 120 835 L150 835 Q160 800 160 780"/>
+                <path d="M80 755 L100 740 M130 735 L145 755 M165 750 L180 770"/>
+
+                <!-- Bottom herb -->
+                <path d="M210 850 Q250 760 300 800 Q285 870 210 850Z"/>
+                <path d="M210 850 L300 800"/>
+                <path d="M245 830 L245 805 M265 820 L275 790"/>
+
+                <!-- Bottom carrot -->
+                <path d="M850 900 Q900 825 950 835 Q935 895 850 900Z"/>
+                <path d="M850 900 L950 835"/>
+                <path d="M900 865 L910 845 M920 850 L935 830"/>
+                <path d="M850 900 Q825 880 815 860 M850 900 Q825 905 810 920"/>
+
+                <!-- Bottom right onion -->
+                <path d="M1430 740 Q1420 680 1480 650 Q1540 680 1530 740 Q1510 790 1480 800 Q1445 780 1430 740Z"/>
+                <path d="M1480 650 Q1460 625 1480 600 Q1500 625 1480 650"/>
+                <path d="M1480 665 Q1455 720 1480 780"/>
+                <path d="M1480 665 Q1505 720 1480 780"/>
+
+                <!-- Additional leaves -->
+                <path d="M30 350 Q75 300 115 335 Q90 390 30 350Z"/>
+                <path d="M30 350 L115 335"/>
+
+                <path d="M1120 840 Q1160 780 1210 810 Q1180 870 1120 840Z"/>
+                <path d="M1120 840 L1210 810"/>
+
+            </g>
+
+            <g class="ingredient-dots">
+                <circle cx="310" cy="110" r="5"/>
+                <circle cx="350" cy="90" r="4"/>
+                <circle cx="820" cy="75" r="7"/>
+                <circle cx="1120" cy="155" r="6"/>
+                <circle cx="1310" cy="245" r="5"/>
+                <circle cx="1530" cy="330" r="6"/>
+                <circle cx="200" cy="430" r="5"/>
+                <circle cx="210" cy="735" r="7"/>
+                <circle cx="390" cy="900" r="6"/>
+                <circle cx="1290" cy="690" r="7"/>
+                <circle cx="1350" cy="850" r="5"/>
+                <circle cx="70" cy="900" r="5"/>
+            </g>
+
+        </svg>
+    </div>
+
+    <!-- Main Authentication Container -->
     <main class="auth-container">
+
         <div class="auth-card">
 
+            <!-- Branding -->
             <div class="logo">
                 <h1>DIY Budget Meal Creator</h1>
                 <p>Affordable meals. Your way.</p>
@@ -184,6 +277,7 @@
             </section>
 
         </div>
+
     </main>
 
     <!-- Scripts must load in this order -->

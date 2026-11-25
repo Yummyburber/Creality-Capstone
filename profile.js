@@ -99,6 +99,9 @@
 
     function render() {
 
+        // Lets pages hide guest-only content, like "Create free account" (styles.css)
+        document.body.classList.toggle("logged-in", Boolean(currentUser));
+
         if (currentUser) {
 
             const name = currentUser.name || "User";

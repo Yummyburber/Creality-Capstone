@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
+<rect width="400" height="300" rx="18" fill="#f1ede4"/><circle cx="340" cy="60" r="70" fill="#fff" opacity=".35"/><circle cx="40" cy="260" r="60" fill="#fff" opacity=".3"/>
+<ellipse cx="200" cy="276" rx="150" ry="10" fill="#000" opacity=".08"/>
+<rect x="70" y="30" width="260" height="240" rx="10" fill="#b07a46" stroke="#3a2e22" stroke-width="2"/>
+<rect x="82" y="42" width="236" height="216" rx="4" fill="#fff8ec" stroke="#3a2e22" stroke-width="1.5"/>
+<!-- open doors -->
+<path d="M70 34 L30 50 L30 252 L70 266 Z" fill="#c98f52" stroke="#3a2e22" stroke-width="2"/>
+<path d="M330 34 L370 50 L370 252 L330 266 Z" fill="#c98f52" stroke="#3a2e22" stroke-width="2"/>
+<circle cx="60" cy="150" r="4" fill="#3a2e22"/><circle cx="340" cy="150" r="4" fill="#3a2e22"/>
+<!-- shelves -->
+<rect x="82" y="112" width="236" height="8" fill="#b07a46" stroke="#3a2e22"/>
+<rect x="82" y="186" width="236" height="8" fill="#b07a46" stroke="#3a2e22"/>
+<!-- top shelf: labeled jars -->
+<rect x="104" y="70" width="36" height="42" rx="6" fill="#f8f4ea" stroke="#3a2e22" stroke-width="1.5"/><rect x="102" y="64" width="40" height="10" rx="3" fill="#31513a" stroke="#3a2e22" stroke-width="1.5"/><rect x="107" y="86" width="30" height="13" rx="2" fill="#fff" stroke="#3a2e22"/><text x="122" y="96" font-size="9" font-weight="bold" fill="#1f2a22" text-anchor="middle" font-family="Arial">Rice</text><rect x="108" y="76" width="4" height="30" rx="2" fill="#fff" opacity=".45"/>
+<rect x="150" y="70" width="36" height="42" rx="6" fill="#f4c77a" stroke="#3a2e22" stroke-width="1.5"/><rect x="148" y="64" width="40" height="10" rx="3" fill="#31513a" stroke="#3a2e22" stroke-width="1.5"/><rect x="153" y="86" width="30" height="13" rx="2" fill="#fff" stroke="#3a2e22"/><text x="168" y="96" font-size="9" font-weight="bold" fill="#1f2a22" text-anchor="middle" font-family="Arial">Pasta</text><rect x="154" y="76" width="4" height="30" rx="2" fill="#fff" opacity=".45"/>
+<rect x="196" y="70" width="36" height="42" rx="6" fill="#9c4a2f" stroke="#3a2e22" stroke-width="1.5"/><rect x="194" y="64" width="40" height="10" rx="3" fill="#31513a" stroke="#3a2e22" stroke-width="1.5"/><rect x="199" y="86" width="30" height="13" rx="2" fill="#fff" stroke="#3a2e22"/><text x="214" y="96" font-size="9" font-weight="bold" fill="#1f2a22" text-anchor="middle" font-family="Arial">Beans</text><rect x="200" y="76" width="4" height="30" rx="2" fill="#fff" opacity=".45"/>
+<rect x="242" y="70" width="36" height="42" rx="6" fill="#e8d9b5" stroke="#3a2e22" stroke-width="1.5"/><rect x="240" y="64" width="40" height="10" rx="3" fill="#31513a" stroke="#3a2e22" stroke-width="1.5"/><rect x="245" y="86" width="30" height="13" rx="2" fill="#fff" stroke="#3a2e22"/><text x="260" y="96" font-size="9" font-weight="bold" fill="#1f2a22" text-anchor="middle" font-family="Arial">Oats</text><rect x="246" y="76" width="4" height="30" rx="2" fill="#fff" opacity=".45"/>
+<!-- middle shelf: egg carton, onion, garlic -->
+<rect x="96" y="160" width="86" height="26" rx="4" fill="#d9cdb8" stroke="#3a2e22" stroke-width="1.5"/>
+<ellipse cx="110" cy="158" rx="9" ry="11" fill="#fffdf6" stroke="#3a2e22"/><ellipse cx="130" cy="158" rx="9" ry="11" fill="#fffdf6" stroke="#3a2e22"/>
+<ellipse cx="150" cy="158" rx="9" ry="11" fill="#fffdf6" stroke="#3a2e22"/><ellipse cx="170" cy="158" rx="9" ry="11" fill="#fffdf6" stroke="#3a2e22"/>
+<path d="M214 148 c-4 8 -18 10 -18 24 c0 10 8 14 18 14 s18 -4 18 -14 c0 -14 -14 -16 -18 -24z" fill="#c9824a" stroke="#3a2e22" stroke-width="1.5"/><path d="M214 152 c-2 10 -2 22 0 32 M206 162 c-2 8 -1 14 2 20 M222 162 c2 8 1 14 -2 20" stroke="#a6612f" fill="none"/>
+<path d="M252 150 c2 8 16 12 16 24 c0 9 -7 13 -16 13 s-16 -4 -16 -13 c0 -12 14 -16 16 -24z" fill="#f6f1e6" stroke="#3a2e22" stroke-width="1.5"/><path d="M252 158 v28 M245 166 c-2 6 -1 14 3 19 M259 166 c2 6 1 14 -3 19" stroke="#d9cfbe" fill="none"/>
+<circle cx="290" cy="170" r="15" fill="#e2463a" stroke="#3a2e22" stroke-width="1.5"/><path d="M283 157 l7 5 l7 -5 l-3 7 h-8 z" fill="#4c9a5b" stroke="#3a2e22" stroke-width="1"/><ellipse cx="284.75" cy="165.5" rx="3.75" ry="2.6999999999999997" fill="#fff" opacity=".45"/>
+<!-- bottom shelf: spinach, carrots, potatoes -->
+<g transform="translate(118 238) scale(1)"><path d="M0 0 c-30 -6 -36 -40 -20 -56 c18 6 28 30 20 56z" fill="#3f8a4a" stroke="#3a2e22" stroke-width="1.5"/><path d="M0 0 c26 -10 34 -40 18 -54 c-18 8 -24 30 -18 54z" fill="#4c9a5b" stroke="#3a2e22" stroke-width="1.5"/><path d="M0 0 c-4 -18 -2 -40 4 -60 c10 16 8 40 -4 60z" fill="#5cae69" stroke="#3a2e22" stroke-width="1.5"/><path d="M0 0 v-50 M0 -4 l-12 -30 M0 -4 l12 -28" stroke="#2f6b3c" stroke-width="1.5" fill="none"/></g>
+<path d="M176 222 l-10 44 c-1 4 3 5 5 2 l15 -44 z" fill="#f08a24" stroke="#3a2e22" stroke-width="1.5"/><path d="M181 222 l-2 -14 M181 222 l8 -10 M181 222 l-9 -8" stroke="#4c9a5b" stroke-width="3" stroke-linecap="round"/><path d="M173 236 h6 M170 248 h5" stroke="#c96a12" stroke-width="1.5"/><path d="M192 228 l-10 44 c-1 4 3 5 5 2 l15 -44 z" fill="#f08a24" stroke="#3a2e22" stroke-width="1.5"/><path d="M197 228 l-2 -14 M197 228 l8 -10 M197 228 l-9 -8" stroke="#4c9a5b" stroke-width="3" stroke-linecap="round"/><path d="M189 242 h6 M186 254 h5" stroke="#c96a12" stroke-width="1.5"/>
+<ellipse cx="248" cy="246" rx="18" ry="13" fill="#c9a06a" stroke="#3a2e22" stroke-width="1.5"/>
+<ellipse cx="280" cy="248" rx="15" ry="11" fill="#b98f58" stroke="#3a2e22" stroke-width="1.5"/>
+<!-- tag -->
+<g><rect x="250" y="8" width="140" height="46" rx="12" fill="#fff" stroke="#3a2e22" stroke-width="1.5"/><circle cx="270" cy="31" r="11" fill="#31513a" stroke="#fff" stroke-width="2"/><path d="M265 31 l3.5 4 l7 -8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="288" y="28" font-size="12" font-weight="bold" fill="#1f2a22" font-family="Arial">In your cupboard</text><text x="288" y="44" font-size="11" fill="#5c6159" font-family="Arial">12 items</text></g>
+</svg>

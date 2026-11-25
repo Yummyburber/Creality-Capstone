@@ -9,7 +9,7 @@
     --brand: #31513a;
     --link: #31513a;
     --accent: #e9a03b;
-    --accent-text: #a8620a;
+    --accent-text: #8a5006;
     --nav-bg: #fffdf9;
     --nav-text: #4a4a44;
     --nav-text-strong: #1f3a2a;
@@ -411,6 +411,93 @@ body {
     height: 44px;
    box-sizing: border-box;
    font-size: 1rem;
+}
+
+/* ===== Shared section headings and buttons ===== */
+.section-eyebrow {
+    margin: 0 0 0.4rem;
+    color: var(--accent-text);
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.section-title {
+    margin: 0;
+    color: var(--nav-text-strong);
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.15;
+}
+
+.section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--button-bg);
+    border-radius: 999px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.button--primary {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.button--primary:hover {
+    filter: brightness(1.15);
+}
+
+.button--secondary {
+    background-color: transparent;
+    color: var(--nav-text-strong);
+}
+
+.button--secondary:hover {
+    background-color: var(--control-hover);
+}
+
+/* Amber button, and a light outline button for use on photos and dark bands */
+.button--accent {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    color: #1f2a22;
+}
+
+.button--accent:hover {
+    filter: brightness(1.08);
+}
+
+.button--light {
+    border-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.button--light:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Things only visitors who are not logged in should see (profile.js sets body.logged-in) */
+body.logged-in [data-guest-only] {
+    display: none;
 }
 
 /* Homepage stats band (numbers count up in animations.js) */

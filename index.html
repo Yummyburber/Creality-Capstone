@@ -11,12 +11,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Edu+QLD+Hand:wght@400..700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="loader.css">
+        <link rel="stylesheet" href="home.css">
 
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script src="supabaseClient.js"></script>
 
-        <script src="homepage.js" defer></script>
         <script src="animations.js" defer></script>
+        <script src="homepage.js" defer></script>
     </head>
 
     <body>
@@ -44,70 +45,242 @@
        </header>
        <main>
 
-        <section class="hero">
-            <h1>
-                <span><span class="word">Cook</span> <span class="word">Something</span></span>
-                <span class="title-line"><span class="word hero-highlight">Great</span> <span class="word">today</span></span>
-            </h1>
-            <p><em>Good food. Less money. Your way.</em></p>
-            <form class="search-bar">
-                
-            <input type="text" placeholder="Search for recipes...">
-            <button type="submit"><i data-lucide="search"></i></button>
-            </form>
-            
+        <div class="scroll-progress" aria-hidden="true"></div>
+
+        <!-- Full-screen opening: the photo drifts slower than the page (homepage.js) -->
+        <section class="hero hero--full">
+            <div class="hero-content">
+                <h1>
+                    <span><span class="word">Cook</span> <span class="word">Something</span></span>
+                    <span class="title-line"><span class="word hero-highlight">Great</span> <span class="word">today</span></span>
+                </h1>
+                <p><em>Good food. Less money. Your way.</em></p>
+                <p class="hero-sub">Cook from what's already in your cupboard, or from the stores near you.</p>
+                <div class="hero-actions">
+                    <a class="button button--accent" href="#how-it-works" data-path="cupboard">
+                        <i data-lucide="shopping-basket"></i> Cook from my cupboard
+                    </a>
+                    <a class="button button--light" href="#how-it-works" data-path="stores">
+                        <i data-lucide="map-pin"></i> Find meals near me
+                    </a>
+                </div>
+            </div>
+            <a class="scroll-cue" href="#how-it-works" aria-label="Scroll down to How it works">
+                <span>Scroll</span>
+                <i data-lucide="chevron-down"></i>
+            </a>
         </section>
-        <!-- PLACEHOLDER NUMBERS: replace data-count (and the text) with real figures before launch -->
-        <section class="stats" aria-label="Meal Maker in numbers">
-            <div class="stat">
-                <span class="stat-number" data-count="1240">1,240</span>
-                <span class="stat-label">recipes to explore</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number" data-count="4.5" data-decimals="2" data-prefix="$">$4.50</span>
-                <span class="stat-label">average cost per meal</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number" data-count="25" data-suffix=" min">25 min</span>
-                <span class="stat-label">average cooking time</span>
+
+        <!-- How it works: two ways to start; the example screen stays in place while the steps scroll past -->
+        <section class="how-story" id="how-it-works" aria-labelledby="how-it-works-title">
+            <header class="section-header" data-reveal="up">
+                <p class="section-eyebrow">Two ways to start</p>
+                <h2 id="how-it-works-title" class="section-title">How it works</h2>
+                <p class="section-lead">Got ingredients at home? We'll cook with them. Cupboard empty? Tell us your ZIP code and we'll build meals from a store near you, with estimated prices.</p>
+
+                <div class="path-toggle" role="group" aria-label="Choose how to start">
+                    <button type="button" class="path-option" data-path="cupboard" aria-pressed="true">
+                        <i data-lucide="shopping-basket"></i> Cook from my cupboard
+                    </button>
+                    <button type="button" class="path-option" data-path="stores" aria-pressed="false">
+                        <i data-lucide="map-pin"></i> Shop stores near me
+                    </button>
+                </div>
+            </header>
+
+            <div class="how-story-body">
+                <div class="how-visual">
+                    <div class="how-device" aria-label="Example of the app">
+                        <span class="how-example">Example</span>
+
+                        <!-- Cupboard path -->
+                        <div class="how-screen" data-path="cupboard" data-screen="1">
+                            <p class="how-screen-title"><i data-lucide="shopping-basket"></i> What's in your cupboard?</p>
+                            <div class="how-scene" aria-hidden="true">
+                                <span class="how-steam"><i></i><i></i><i></i></span>
+                                <img class="how-pot" src="Images/hot-pot (1).png" alt="">
+                            </div>
+                            <p class="how-hint">Tap an ingredient to add or remove it</p>
+                            <div class="how-chips">
+                                <button type="button" class="how-chip" data-ingredient="tomato" aria-pressed="true">Tomato</button>
+                                <button type="button" class="how-chip" data-ingredient="egg" aria-pressed="true">Eggs</button>
+                                <button type="button" class="how-chip" data-ingredient="spinach" aria-pressed="true">Spinach</button>
+                                <button type="button" class="how-chip" data-ingredient="rice" aria-pressed="true">Rice</button>
+                                <button type="button" class="how-chip" data-ingredient="garlic" aria-pressed="false">Garlic</button>
+                                <button type="button" class="how-chip" data-ingredient="carrot" aria-pressed="false">Carrot</button>
+                            </div>
+                        </div>
+
+                        <div class="how-screen" data-path="cupboard" data-screen="2">
+                            <p class="how-screen-title"><i data-lucide="sparkles"></i> Made for you</p>
+                            <div class="how-recipe">
+                                <span class="how-ai-badge"><i data-lucide="sparkles"></i> AI-generated &middot; check for allergies</span>
+                                <div class="how-recipe-photo"></div>
+                                <h4>Spinach and tomato fried rice</h4>
+                                <p class="how-recipe-meta">15 min &middot; Easy &middot; Vegetarian &middot; Serves 2</p>
+                                <ul class="how-ingredients">
+                                    <li style="--i:0"><i data-lucide="check"></i> Rice <span>in your cupboard</span></li>
+                                    <li style="--i:1"><i data-lucide="check"></i> Eggs <span>in your cupboard</span></li>
+                                    <li style="--i:2"><i data-lucide="check"></i> Spinach <span>in your cupboard</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="how-screen" data-path="cupboard" data-screen="3">
+                            <p class="how-screen-title"><i data-lucide="calendar-days"></i> Your week</p>
+                            <div class="how-week">
+                                <span style="--i:0">Mon<b class="how-meal">Fried rice</b></span>
+                                <span style="--i:1">Tue<b class="how-meal">Pasta</b></span>
+                                <span style="--i:2">Wed<b class="how-meal">Tacos</b></span>
+                                <span style="--i:3">Thu<b class="how-meal">Soup</b></span>
+                                <span style="--i:4">Fri<b class="how-meal">Curry</b></span>
+                            </div>
+                            <div class="how-budget">
+                                <div class="how-budget-label"><span>Weekly budget</span><span>Est. $31 of $50</span></div>
+                                <div class="how-budget-bar"><span></span></div>
+                            </div>
+                        </div>
+
+                        <!-- Stores path -->
+                        <div class="how-screen" data-path="stores" data-screen="1">
+                            <p class="how-screen-title"><i data-lucide="map-pin"></i> Stores near you</p>
+                            <div class="how-zip">
+                                <i data-lucide="search"></i>
+                                <span class="how-typed" data-text="52001"></span><span class="how-caret" aria-hidden="true"></span>
+                            </div>
+                            <div class="how-map" aria-hidden="true">
+                                <span class="how-pin"><i data-lucide="map-pin"></i></span>
+                            </div>
+                            <div class="how-store">
+                                <span class="how-store-icon"><i data-lucide="store"></i></span>
+                                <span><b>Walmart Supercenter</b><small>2.1 miles away &middot; open now</small></span>
+                            </div>
+                        </div>
+
+                        <div class="how-screen" data-path="stores" data-screen="2">
+                            <p class="how-screen-title"><i data-lucide="shopping-cart"></i> From nearby shelves</p>
+                            <ul class="how-prices">
+                                <li style="--i:0"><span class="how-token-inline" data-ingredient="chicken"></span> Chicken thighs <em>Est. $4.12</em></li>
+                                <li style="--i:1"><span class="how-token-inline" data-ingredient="rice"></span> Rice, 2 lb <em>Est. $1.28</em></li>
+                                <li style="--i:2"><span class="how-token-inline" data-ingredient="broccoli"></span> Broccoli <em>Est. $1.94</em></li>
+                                <li style="--i:3"><span class="how-token-inline" data-ingredient="garlic"></span> Garlic <em>Est. $0.68</em></li>
+                            </ul>
+                            <div class="how-meal-idea">
+                                <span class="how-meal-idea-label">Meal idea</span>
+                                <b>Garlic chicken with broccoli rice</b>
+                                <small>Serves 3 &middot; Est. $2.67 per serving</small>
+                            </div>
+                            <p class="how-price-note">Estimated prices &middot; Walmart &middot; retrieved today</p>
+                        </div>
+
+                        <div class="how-screen" data-path="stores" data-screen="3">
+                            <p class="how-screen-title"><i data-lucide="list-checks"></i> Your shopping list</p>
+                            <ul class="how-list">
+                                <li style="--i:0"><span class="how-check"></span> Chicken thighs</li>
+                                <li style="--i:1"><span class="how-check"></span> Rice, 2 lb</li>
+                                <li style="--i:2"><span class="how-check"></span> Broccoli</li>
+                                <li style="--i:3"><span class="how-check"></span> Garlic</li>
+                            </ul>
+                            <p class="how-skip"><i data-lucide="shopping-basket"></i> Left off: soy sauce and oil, already in your cupboard</p>
+                            <div class="how-budget">
+                                <div class="how-budget-label"><span>3 meals this week</span><span>Est. $8.02 of $15</span></div>
+                                <div class="how-budget-bar how-budget-bar--small"><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ol class="how-steps">
+                    <li class="how-step" data-path="cupboard" data-step="1">
+                        <span class="how-step-number">1</span>
+                        <h3>Tell us what's in your cupboard</h3>
+                        <p>Add the ingredients you already have, your diet, and your allergies. No more staring into the fridge wondering what to make.</p>
+                    </li>
+                    <li class="how-step" data-path="cupboard" data-step="2">
+                        <span class="how-step-number">2</span>
+                        <h3>Get a recipe made for you</h3>
+                        <p>Our AI builds a recipe around what you have, skips anything you're allergic to, and shows which ingredients you already own.</p>
+                    </li>
+                    <li class="how-step" data-path="cupboard" data-step="3">
+                        <span class="how-step-number">3</span>
+                        <h3>Plan your week, stay on budget</h3>
+                        <p>Save your favorites and drop them into a 7-day meal plan that keeps an eye on what you want to spend.</p>
+                    </li>
+
+                    <li class="how-step" data-path="stores" data-step="1" hidden>
+                        <span class="how-step-number">1</span>
+                        <h3>Enter your ZIP code</h3>
+                        <p>Cupboard empty? Tell us where you are and we'll find a supermarket near you.</p>
+                    </li>
+                    <li class="how-step" data-path="stores" data-step="2" hidden>
+                        <span class="how-step-number">2</span>
+                        <h3>Pick meals you'll love</h3>
+                        <p>We build meals from what that store sells, with an estimated price for every ingredient and for each serving.</p>
+                    </li>
+                    <li class="how-step" data-path="stores" data-step="3" hidden>
+                        <span class="how-step-number">3</span>
+                        <h3>Shop with a list that fits your budget</h3>
+                        <p>Get one shopping list for the week, with ingredients you already have left off and the estimated total up front.</p>
+                    </li>
+                </ol>
             </div>
         </section>
-        <section class="cards-section">
-            <div class="cards-grid">
-   
-        <a class="feature-card" href="recipes.html">
-        <i data-lucide="chef-hat"></i>
-        <h2>Find Recipes</h2>
-        <p>Browse budget-friendly recipes, filtered by your preferences.</p>
-        <i class="card-arrow" data-lucide="arrow-right"></i>
-     </a>
 
-     
+        <!-- Features: rows slide in from alternating sides -->
+        <section class="features" aria-labelledby="features-title">
+            <header class="section-header" data-reveal="up">
+                <p class="section-eyebrow">Why Meal Maker</p>
+                <h2 id="features-title" class="section-title">Made for real kitchens and real budgets</h2>
+            </header>
 
-        <a class="feature-card" href="create.html">
-        <i data-lucide="pencil"></i>
-        <h2>Create Your Own</h2>
-        <p>Build a custom recipe, save it, and keep it for later.</p>
-        <i class="card-arrow" data-lucide="arrow-right"></i>
-     </a>
+            <article class="feature-row">
+                <div class="feature-media feature-media--art" data-reveal="left">
+                    <img src="Images/feature-cupboard.svg" width="400" height="300" loading="lazy"
+                         alt="An open cupboard with jars of rice, pasta, beans, and oats, eggs, vegetables, and a tag saying 12 items are in your cupboard">
+                </div>
+                <div class="feature-text" data-reveal="right">
+                    <span class="feature-icon"><i data-lucide="refrigerator"></i></span>
+                    <h3>Use up what you already have</h3>
+                    <p>Keep track of your cupboard and find recipes that use it up, so less food goes to waste and you buy only what's missing.</p>
+                    <a class="feature-link" href="pantry.html">Set up your cupboard <i data-lucide="arrow-right"></i></a>
+                </div>
+            </article>
 
-        <a class="feature-card" href="pantry.html">
-        <i data-lucide="shopping-basket"></i>
-        <h2>Get Ingredients</h2>
-        <p>See what you need and where to find it, with estimated prices.</p>
-        <i class="card-arrow" data-lucide="arrow-right"></i>
-     </a>
+            <article class="feature-row feature-row--reverse">
+                <div class="feature-media feature-media--art" data-reveal="right">
+                    <img src="Images/feature-store-prices.svg" width="400" height="300" loading="lazy"
+                         alt="A phone showing ZIP code 52001, a nearby grocery store, and estimated prices, next to a receipt with an estimated total of $8.02">
+                </div>
+                <div class="feature-text" data-reveal="left">
+                    <span class="feature-icon"><i data-lucide="store"></i></span>
+                    <h3>Shop the store near you</h3>
+                    <p>Enter your ZIP code to see estimated prices at a nearby supermarket, the cost of each meal, and the cost per serving, before you leave the house.</p>
+                    <a class="feature-link" href="#how-it-works" data-path="stores">See how it works <i data-lucide="arrow-right"></i></a>
+                </div>
+            </article>
 
-     
+            <article class="feature-row">
+                <div class="feature-media feature-media--art" data-reveal="left">
+                    <img src="Images/feature-allergy-swap.svg" width="400" height="300" loading="lazy"
+                         alt="An ingredient list for someone allergic to peanuts: peanut butter is removed and swapped for sunflower seed butter">
+                </div>
+                <div class="feature-text" data-reveal="right">
+                    <span class="feature-icon"><i data-lucide="heart-handshake"></i></span>
+                    <h3>Fits your diet</h3>
+                    <p>Tell us your dietary needs and allergies once. Every AI recipe is checked against your allergies before you see it.</p>
+                    <a class="feature-link" href="recipes.html">Find recipes for your diet <i data-lucide="arrow-right"></i></a>
+                </div>
+            </article>
+        </section>
 
-        <a class="feature-card" href="mealPlan.html">
-        <i data-lucide="circle-dollar-sign"></i>
-        <h2>Stay on Budget</h2>
-        <p>Cook delicious meals without breaking the bank.</p>
-        <i class="card-arrow" data-lucide="arrow-right"></i>
-     </a>
-       
-        </div>
+        <!-- Closing invitation -->
+        <section class="cta-band" data-reveal="up">
+            <h2>Ready to cook something great?</h2>
+            <p>Join Meal Maker and start turning what's in your kitchen into meals you'll love.</p>
+            <div class="section-actions">
+                <a class="button button--accent" href="login.html" data-guest-only>Create free account</a>
+                <a class="button button--light" href="recipes.html">Explore recipes</a>
+            </div>
         </section>
         </main>
        <footer>

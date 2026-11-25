@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
+<rect width="400" height="300" rx="18" fill="#f1ede4"/><circle cx="340" cy="60" r="70" fill="#fff" opacity=".35"/><circle cx="40" cy="260" r="60" fill="#fff" opacity=".3"/>
+<rect x="40" y="26" width="320" height="248" rx="16" fill="#fff" stroke="#3a2e22" stroke-width="1.5"/>
+<text x="62" y="56" font-size="14" font-weight="bold" fill="#1f2a22" font-family="Arial">Ingredients</text>
+<rect x="250" y="40" width="94" height="22" rx="11" fill="#fff1ef" stroke="#e2463a"/><text x="297" y="55" font-size="10" font-weight="bold" fill="#b3261e" text-anchor="middle" font-family="Arial">Allergy: peanuts</text>
+<g font-family="Arial" font-size="12" fill="#1f2a22">
+<circle cx="70" cy="86" r="8" fill="#31513a" stroke="#fff" stroke-width="2"/><path d="M65 86 l3.5 4 l7 -8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="86" y="90">Rice noodles</text><path d="M60 102 h282" stroke="#ece4d4"/>
+<circle cx="70" cy="120" r="8" fill="#31513a" stroke="#fff" stroke-width="2"/><path d="M65 120 l3.5 4 l7 -8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="86" y="124">Carrot and cabbage</text><path d="M60 136 h282" stroke="#ece4d4"/>
+</g>
+<!-- flagged row -->
+<rect x="56" y="144" width="288" height="34" rx="8" fill="#fff1ef" stroke="#e2463a"/>
+<g transform="translate(76 161) scale(0.55)"><path d="M-10 -14 c10 -8 22 2 16 12 c-3 5 -3 7 0 12 c6 10 -6 20 -16 12 c-8 -6 -6 -12 -2 -18 c3 -5 -6 -12 2 -18z" fill="#c98f52" stroke="#3a2e22" stroke-width="1.5"/><path d="M-6 -8 h6 M-8 8 h6 M2 -2 h4" stroke="#a87440" stroke-width="1.5"/></g>
+<text x="96" y="166" font-size="12" fill="#b3261e" font-family="Arial" text-decoration="line-through">Peanut butter</text>
+<text x="334" y="166" font-size="10" font-weight="bold" fill="#b3261e" text-anchor="end" font-family="Arial">removed</text>
+<path d="M200 182 v14" stroke="#e9a03b" stroke-width="4" stroke-linecap="round"/><path d="M192 192 l8 10 l8 -10 z" fill="#e9a03b"/>
+<!-- swap row -->
+<rect x="56" y="206" width="288" height="34" rx="8" fill="#e3f1e6" stroke="#31513a"/>
+<circle cx="76" cy="223" r="9" fill="#f4b81f" stroke="#3a2e22"/><circle cx="76" cy="223" r="4" fill="#8a5a32"/>
+<text x="96" y="228" font-size="12" font-weight="bold" fill="#1f2a22" font-family="Arial">Sunflower seed butter</text>
+<text x="334" y="228" font-size="10" font-weight="bold" fill="#31513a" text-anchor="end" font-family="Arial">safe swap</text>
+<text x="200" y="262" font-size="11" fill="#5c6159" text-anchor="middle" font-family="Arial">Always double-check labels for allergens</text>
+</svg>

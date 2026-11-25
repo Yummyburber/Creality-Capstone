@@ -1,6 +1,6 @@
 
 /* =========================================
-   MEAL MAKER - AUTHENTICATION PAGE
+   MEAL MAKER - COMPACT LOGIN DESIGN
 ========================================= */
 
 * {
@@ -9,49 +9,24 @@
     padding: 0;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    color: #263326;
+    color: #30352d;
     min-height: 100vh;
+    min-height: 100dvh;
     background:
-        radial-gradient(ellipse at 10% 15%, rgba(170, 211, 91, 0.35), transparent 35%),
-        radial-gradient(ellipse at 90% 85%, rgba(177, 215, 91, 0.35), transparent 35%),
+        radial-gradient(ellipse at 15% 15%, rgba(155, 205, 88, 0.3), transparent 35%),
+        radial-gradient(ellipse at 85% 85%, rgba(155, 205, 88, 0.25), transparent 35%),
         linear-gradient(135deg, #579b35, #659f38 55%, #4d8c30);
     overflow-x: hidden;
-    position: relative;
-}
-
-/* Decorative background curves */
-
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 50%;
-}
-
-body::before {
-    width: 420px;
-    height: 220px;
-    top: 5%;
-    left: -230px;
-    background: rgba(196, 226, 115, 0.24);
-    transform: rotate(25deg);
-}
-
-body::after {
-    width: 500px;
-    height: 250px;
-    right: -260px;
-    bottom: -100px;
-    background: rgba(196, 226, 115, 0.24);
-    transform: rotate(-25deg);
 }
 
 /* =========================================
-   OUTLINED FOOD INGREDIENT BACKGROUND
+   GREEN BACKGROUND DECORATIONS
 ========================================= */
 
 .background-art {
@@ -61,78 +36,118 @@ body::after {
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.65;
+    opacity: 0.8;
 }
 
 .background-art svg {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 .ingredient-lines {
     fill: none;
-    stroke: rgba(35, 82, 25, 0.55);
-    stroke-width: 3;
+    stroke: rgba(35, 78, 25, 0.72);
+    stroke-width: 2.6;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
 .ingredient-dots {
-    fill: rgba(35, 82, 25, 0.35);
+    fill: rgba(35, 78, 25, 0.55);
+}
+
+/* Soft decorative waves */
+
+.background-wave {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    background: rgba(177, 218, 105, 0.28);
+    border-radius: 50%;
+}
+
+.wave-one {
+    width: 330px;
+    height: 115px;
+    top: 13%;
+    left: -145px;
+    transform: rotate(25deg);
+}
+
+.wave-two {
+    width: 380px;
+    height: 125px;
+    bottom: -45px;
+    right: -120px;
+    transform: rotate(-20deg);
+}
+
+.wave-three {
+    width: 290px;
+    height: 90px;
+    top: -55px;
+    right: 22%;
+    transform: rotate(-35deg);
 }
 
 /* =========================================
-   MAIN CONTAINER
+   MAIN PAGE LAYOUT
 ========================================= */
 
 .auth-container {
     min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 35px 20px;
+    padding: 20px;
     position: relative;
     z-index: 1;
 }
 
 /* =========================================
-   AUTHENTICATION CARD
+   LOGIN CARD
 ========================================= */
 
 .auth-card {
     width: 100%;
-    max-width: 600px;
-    background: rgba(255, 255, 239, 0.96);
-    padding: 42px 48px;
-    border-radius: 27px;
+    max-width: 550px;
+    background: rgba(255, 255, 242, 0.97);
+    padding: 27px 36px;
+    border-radius: 23px;
+    border: 1px solid rgba(255, 255, 255, 0.75);
     box-shadow:
-        0 20px 55px rgba(31, 65, 24, 0.22),
-        0 3px 12px rgba(31, 65, 24, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+        0 16px 42px rgba(31, 65, 24, 0.25),
+        0 3px 10px rgba(31, 65, 24, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: cardFadeIn 0.45s ease-out;
 }
 
 /* =========================================
-   LOGO / BRANDING
+   BRANDING
 ========================================= */
 
 .logo {
     text-align: center;
-    margin-bottom: 38px;
+    margin-bottom: 17px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e1e3d8;
 }
 
 .logo h1 {
-    font-size: 36px;
-    font-weight: 750;
-    letter-spacing: -0.8px;
-    margin-bottom: 9px;
     color: #285d25;
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -0.6px;
+    margin-bottom: 5px;
 }
 
 .logo p {
-    color: #62705a;
-    font-size: 18px;
+    color: #65705e;
+    font-size: 16px;
 }
 
 /* =========================================
@@ -149,43 +164,44 @@ body::after {
 
 .form-section h2 {
     text-align: center;
-    margin-bottom: 12px;
-    font-size: 32px;
+    font-size: 27px;
     color: #30352d;
+    margin-bottom: 7px;
 }
 
 .form-description {
     text-align: center;
     color: #687064;
-    margin-bottom: 28px;
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.45;
+    margin-bottom: 16px;
 }
 
 /* =========================================
-   FORM GROUPS
+   INPUT FIELDS
 ========================================= */
 
 .form-group {
-    margin-bottom: 19px;
+    margin-bottom: 12px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 9px;
-    font-weight: bold;
-    font-size: 17px;
     color: #285d25;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .form-group input {
+    display: block;
     width: 100%;
-    padding: 16px 17px;
+    padding: 12px 14px;
     border: 1px solid #d8ddcf;
-    border-radius: 17px;
-    background-color: #fff;
+    border-radius: 15px;
+    background: #fff;
     color: #30352d;
-    font-size: 17px;
+    font-size: 15px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -196,7 +212,7 @@ body::after {
 .form-group input:focus {
     outline: none;
     border-color: #619a43;
-    box-shadow: 0 0 0 4px rgba(97, 154, 67, 0.14);
+    box-shadow: 0 0 0 3px rgba(97, 154, 67, 0.15);
 }
 
 /* =========================================
@@ -205,15 +221,15 @@ body::after {
 
 .forgot-password {
     text-align: right;
-    margin-top: -5px;
-    margin-bottom: 20px;
+    margin-top: -2px;
+    margin-bottom: 13px;
 }
 
 .forgot-password button {
     background: none;
     border: none;
     color: #397c2e;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -227,23 +243,24 @@ body::after {
 ========================================= */
 
 .submit-btn {
+    display: block;
     width: 100%;
-    padding: 17px;
+    padding: 13px;
+    margin-top: 2px;
     border: none;
-    border-radius: 18px;
+    border-radius: 15px;
     background: linear-gradient(110deg, #ffd400, #ffcc00);
-    color: #24351e;
-    font-size: 19px;
+    color: #26351e;
+    font-size: 17px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 3px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .submit-btn:hover {
     background: linear-gradient(110deg, #ffca00, #f6bd00);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(170, 135, 0, 0.2);
+    box-shadow: 0 5px 13px rgba(170, 135, 0, 0.2);
 }
 
 .submit-btn:active {
@@ -257,15 +274,15 @@ body::after {
 }
 
 /* =========================================
-   LOGIN / SIGNUP TOGGLE
+   LOGIN / SIGNUP LINKS
 ========================================= */
 
 .toggle-text {
     text-align: center;
-    margin-top: 27px;
-    font-size: 16px;
+    margin-top: 18px;
     color: #626b5d;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
 .toggle-btn {
@@ -273,8 +290,8 @@ body::after {
     border: none;
     color: #34752a;
     font-weight: bold;
+    font-size: 15px;
     cursor: pointer;
-    font-size: 16px;
 }
 
 .toggle-btn:hover {
@@ -282,23 +299,19 @@ body::after {
 }
 
 /* =========================================
-   ANIMATIONS
+   ANIMATION
 ========================================= */
 
 @keyframes cardFadeIn {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.auth-card {
-    animation: cardFadeIn 0.55s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -311,29 +324,78 @@ body::after {
 }
 
 /* =========================================
+   SHORT DESKTOP SCREENS
+   Keeps the login card compact
+========================================= */
+
+@media (max-height: 700px) and (min-width: 769px) {
+    .auth-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .auth-card {
+        padding: 20px 32px;
+    }
+
+    .logo {
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+    }
+
+    .logo h1 {
+        font-size: 26px;
+    }
+
+    .logo p {
+        font-size: 14px;
+    }
+
+    .form-section h2 {
+        font-size: 24px;
+    }
+
+    .form-description {
+        margin-bottom: 11px;
+    }
+
+    .form-group {
+        margin-bottom: 9px;
+    }
+
+    .form-group input {
+        padding: 10px 13px;
+    }
+
+    .forgot-password {
+        margin-bottom: 9px;
+    }
+
+    .submit-btn {
+        padding: 11px;
+    }
+
+    .toggle-text {
+        margin-top: 12px;
+    }
+}
+
+/* =========================================
    TABLET RESPONSIVENESS
 ========================================= */
 
 @media (max-width: 768px) {
     .auth-container {
-        padding: 25px 18px;
+        padding: 22px 17px;
     }
 
     .auth-card {
-        max-width: 520px;
-        padding: 36px 32px;
-    }
-
-    .logo h1 {
-        font-size: 30px;
-    }
-
-    .form-section h2 {
-        font-size: 28px;
+        max-width: 500px;
+        padding: 27px 28px;
     }
 
     .background-art {
-        opacity: 0.4;
+        opacity: 0.55;
     }
 }
 
@@ -343,47 +405,47 @@ body::after {
 
 @media (max-width: 500px) {
     .auth-container {
-        padding: 18px 14px;
+        padding: 16px 13px;
     }
 
     .auth-card {
-        padding: 30px 23px;
-        border-radius: 22px;
+        padding: 25px 21px;
+        border-radius: 20px;
     }
 
     .logo {
-        margin-bottom: 30px;
+        margin-bottom: 18px;
+        padding-bottom: 13px;
     }
 
     .logo h1 {
-        font-size: 25px;
-    }
-
-    .logo p {
-        font-size: 15px;
-    }
-
-    .form-section h2 {
         font-size: 24px;
     }
 
+    .logo p {
+        font-size: 14px;
+    }
+
+    .form-section h2 {
+        font-size: 23px;
+    }
+
     .form-description {
-        font-size: 15px;
-        margin-bottom: 23px;
+        font-size: 14px;
     }
 
     .form-group label {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .form-group input {
-        padding: 13px;
-        font-size: 15px;
+        padding: 12px;
+        font-size: 14px;
     }
 
     .submit-btn {
-        padding: 14px;
-        font-size: 17px;
+        padding: 13px;
+        font-size: 16px;
     }
 
     .toggle-text,
@@ -392,7 +454,7 @@ body::after {
     }
 
     .background-art {
-        opacity: 0.25;
+        opacity: 0.3;
     }
 }
 
@@ -402,8 +464,8 @@ body::after {
 
 body.dark {
     background:
-        radial-gradient(ellipse at 10% 15%, rgba(65, 103, 48, 0.3), transparent 35%),
-        radial-gradient(ellipse at 90% 85%, rgba(65, 103, 48, 0.3), transparent 35%),
+        radial-gradient(ellipse at 15% 15%, rgba(65, 103, 48, 0.3), transparent 35%),
+        radial-gradient(ellipse at 85% 85%, rgba(65, 103, 48, 0.3), transparent 35%),
         linear-gradient(135deg, #172619, #203821 55%, #172619);
     color: #e0e0e0;
 }
@@ -412,6 +474,10 @@ body.dark .auth-card {
     background: rgba(30, 41, 33, 0.97);
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+}
+
+body.dark .logo {
+    border-bottom-color: #405143;
 }
 
 body.dark .logo h1 {

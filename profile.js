@@ -101,7 +101,7 @@
                     '</div>' +
                 '</div>' +
 
-                item("user-round", "View profile", { action: "soon" }) +
+                item("user-round", "View profile", { href: "profile.html" }) +
                 item("book-open", "My recipes", { action: "soon" }) +
                 item("heart", "Favorites", { action: "soon" }) +
                 item("shopping-basket", "My pantry", { href: "pantry.html" }) +

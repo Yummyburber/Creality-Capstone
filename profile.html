@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | DIY Meal Maker</title>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="profile.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+</head>
+
+<body>
+    <script src="loader.js"></script>
+
+    <header>
+        <nav class="navbar">
+            <a class="logo" href="index.html" aria-label="Meal Maker homepage">
+                <img src="Images/hot-pot (1).png" alt="">
+                <h2>Meal Maker</h2>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html"><i data-lucide="house"></i>Home</a></li>
+                <li><a href="recipes.html"><i data-lucide="utensils"></i>Recipes</a></li>
+                <li><a href="create.html"><i data-lucide="plus"></i>Create</a></li>
+                <li><a href="pantry.html"><i data-lucide="can"></i>Pantry</a></li>
+                <li><a href="mealPlan.html"><i data-lucide="cooking-pot"></i>Meal Plan</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button id="menu-toggle" class="menu-toggle" type="button"
+                    aria-label="Open menu" aria-expanded="false">
+                    <i class="icon-open" data-lucide="menu"></i>
+                    <i class="icon-close" data-lucide="x"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="profile-page">
+
+        <div class="profile-page-heading">
+            <div>
+                <p class="profile-eyebrow">MEAL MAKER ACCOUNT</p>
+                <h1>My Profile</h1>
+                <p>Manage your account and your meal-making journey.</p>
+            </div>
+
+            <a href="index.html" class="profile-back-link">
+                <i data-lucide="arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+
+        <section class="profile-overview">
+
+            <div class="profile-identity">
+                <div class="profile-page-avatar" id="profile-avatar">U</div>
+
+                <div class="profile-identity-details">
+                    <p class="profile-eyebrow">YOUR ACCOUNT</p>
+                    <h2 id="profile-name">Loading profile...</h2>
+                    <p id="profile-email">Please wait</p>
+                    <span class="account-status">
+                        <span class="status-dot"></span>
+                        Account active
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview-note">
+                <i data-lucide="leaf"></i>
+                <span>Good food. Less money. Your way.</span>
+            </div>
+
+        </section>
+
+        <div class="profile-dashboard">
+
+            <aside class="profile-sidebar">
+                <h3>Account Menu</h3>
+
+                <a href="#personal-information" class="profile-side-link active">
+                    <i data-lucide="user-round"></i>
+                    My Profile
+                </a>
+
+                <a href="recipes.html" class="profile-side-link">
+                    <i data-lucide="book-open"></i>
+                    My Recipes
+                </a>
+
+                <a href="recipes.html" class="profile-side-link">
+                    <i data-lucide="heart"></i>
+                    Favorites
+                </a>
+
+                <a href="pantry.html" class="profile-side-link">
+                    <i data-lucide="shopping-basket"></i>
+                    My Pantry
+                </a>
+
+                <a href="mealPlan.html" class="profile-side-link">
+                    <i data-lucide="calendar-days"></i>
+                    Meal Plans
+                </a>
+
+                <div class="profile-sidebar-divider"></div>
+
+                <button type="button" class="profile-side-link logout-link" id="profile-logout">
+                    <i data-lucide="log-out"></i>
+                    Log Out
+                </button>
+            </aside>
+
+            <div class="profile-main-content">
+
+                <section class="profile-panel" id="personal-information">
+                    <div class="profile-panel-heading">
+                        <div>
+                            <h2>Personal Information</h2>
+                            <p>View and update your account details.</p>
+                        </div>
+                        <i data-lucide="user-round"></i>
+                    </div>
+
+                    <form id="profile-form">
+
+                        <div class="profile-form-group">
+                            <label for="display-name">Full Name</label>
+                            <input type="text" id="display-name"
+                                placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="display-email">Email Address</label>
+                            <input type="email" id="display-email" readonly>
+                            <small>Email changes are managed separately through account verification.</small>
+                        </div>
+
+                        <div class="profile-form-actions">
+                            <button type="submit" class="profile-save-button" id="save-profile">
+                                <i data-lucide="save"></i>
+                                Save Changes
+                            </button>
+                            <span id="profile-message" role="status"></span>
+                        </div>
+
+                    </form>
+                </section>
+
+                <section class="profile-panel">
+                    <div class="profile-panel-heading">
+                        <div>
+                            <h2>Your Meal Maker</h2>
+                            <p>Your tools for planning affordable meals.</p>
+                        </div>
+                        <i data-lucide="chef-hat"></i>
+                    </div>
+
+                    <div class="profile-feature-grid">
+
+                        <a href="recipes.html" class="profile-feature-card">
+                            <span class="feature-card-icon"><i data-lucide="book-open"></i></span>
+                            <strong>My Recipes</strong>
+                            <span>Explore your recipes</span>
+                            <i data-lucide="arrow-up-right" class="feature-arrow"></i>
+                        </a>
+
+                        <a href="mealPlan.html" class="profile-feature-card">
+                            <span class="feature-card-icon"><i data-lucide="calendar-days"></i></span>
+                            <strong>Meal Plans</strong>
+                            <span>Organize your meals</span>
+                            <i data-lucide="arrow-up-right" class="feature-arrow"></i>
+                        </a>
+
+                        <a href="pantry.html" class="profile-feature-card">
+                            <span class="feature-card-icon"><i data-lucide="shopping-basket"></i></span>
+                            <strong>My Pantry</strong>
+                            <span>Manage your ingredients</span>
+                            <i data-lucide="arrow-up-right" class="feature-arrow"></i>
+                        </a>
+
+                        <a href="recipes.html" class="profile-feature-card">
+                            <span class="feature-card-icon"><i data-lucide="heart"></i></span>
+                            <strong>Favorites</strong>
+                            <span>Find recipes you love</span>
+                            <i data-lucide="arrow-up-right" class="feature-arrow"></i>
+                        </a>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="profile-footer">
+        <p>&copy; 2026 DIY Meal Maker. All rights reserved.</p>
+    </footer>
+
+    <script src="profile.js"></script>
+    <script src="theme.js"></script>
+    <script src="profile-page.js"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -29,7 +29,8 @@
     }
 
     // ===== Cards fade up as they scroll into view =====
-    const revealSelector = ".feature-card, .recipe-card, .stat";
+    // [data-reveal] elements can slide in from a direction: data-reveal="left", "right", or "up" (home.css)
+    const revealSelector = ".feature-card, .recipe-card, .stat, [data-reveal]";
 
     if (!reducedMotion && canObserve) {
         let pageShown = false;

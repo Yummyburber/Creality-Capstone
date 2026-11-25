@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
+<rect width="400" height="300" rx="18" fill="#f1ede4"/><circle cx="340" cy="60" r="70" fill="#fff" opacity=".35"/><circle cx="40" cy="260" r="60" fill="#fff" opacity=".3"/>
+<!-- receipt -->
+<path d="M210 40 h140 v222 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 z" fill="#fff" stroke="#3a2e22" stroke-width="1.5" transform="rotate(5 280 150)"/>
+<g transform="rotate(5 280 150)" font-family="Arial">
+<text x="280" y="66" font-size="13" font-weight="bold" fill="#1f2a22" text-anchor="middle">GROCERY STORE</text>
+<text x="280" y="82" font-size="10" fill="#5c6159" text-anchor="middle">Estimated · retrieved today</text>
+<path d="M222 92 h116" stroke="#3a2e22" stroke-dasharray="4 3"/>
+<text x="224" y="112" font-size="11" fill="#1f2a22">Chicken thighs</text><text x="336" y="112" font-size="11" fill="#1f2a22" text-anchor="end">$4.12</text>
+<text x="224" y="132" font-size="11" fill="#1f2a22">Rice, 2 lb</text><text x="336" y="132" font-size="11" fill="#1f2a22" text-anchor="end">$1.28</text>
+<text x="224" y="152" font-size="11" fill="#1f2a22">Broccoli</text><text x="336" y="152" font-size="11" fill="#1f2a22" text-anchor="end">$1.94</text>
+<text x="224" y="172" font-size="11" fill="#1f2a22">Garlic</text><text x="336" y="172" font-size="11" fill="#1f2a22" text-anchor="end">$0.68</text>
+<path d="M222 186 h116" stroke="#3a2e22" stroke-dasharray="4 3"/>
+<text x="224" y="208" font-size="13" font-weight="bold" fill="#1f2a22">Est. total</text><text x="336" y="208" font-size="13" font-weight="bold" fill="#8a5006" text-anchor="end">$8.02</text>
+<text x="224" y="228" font-size="10" fill="#5c6159">3 meals · $2.67 per serving</text>
+</g>
+<!-- phone -->
+<rect x="44" y="24" width="140" height="256" rx="22" fill="#1f2a22" stroke="#3a2e22" stroke-width="2"/>
+<rect x="54" y="40" width="120" height="226" rx="12" fill="#fffdf9"/>
+<rect x="96" y="30" width="36" height="5" rx="2.5" fill="#444"/>
+<rect x="64" y="52" width="100" height="26" rx="8" fill="#fff" stroke="#e9a03b" stroke-width="2"/>
+<circle cx="76" cy="65" r="5" fill="none" stroke="#5c6159" stroke-width="2"/><text x="88" y="70" font-size="13" font-weight="bold" fill="#1f2a22" font-family="Arial">52001</text>
+<rect x="64" y="86" width="100" height="34" rx="8" fill="#f1ede4"/>
+<rect x="70" y="92" width="22" height="22" rx="5" fill="#31513a"/><path d="M75 100 h12 l-2 -4 h-8 z M76 100 v9 h10 v-9" stroke="#fff" fill="none" stroke-width="1.5"/>
+<text x="98" y="102" font-size="10" font-weight="bold" fill="#1f2a22" font-family="Arial">Grocery store</text><text x="98" y="114" font-size="9" fill="#5c6159" font-family="Arial">2.1 mi</text>
+<g font-family="Arial" font-size="10">
+<text x="66" y="142" fill="#1f2a22">Chicken</text><text x="162" y="142" fill="#8a5006" font-weight="bold" text-anchor="end">Est. $4.12</text>
+<text x="66" y="162" fill="#1f2a22">Rice</text><text x="162" y="162" fill="#8a5006" font-weight="bold" text-anchor="end">Est. $1.28</text>
+<text x="66" y="182" fill="#1f2a22">Broccoli</text><text x="162" y="182" fill="#8a5006" font-weight="bold" text-anchor="end">Est. $1.94</text>
+<text x="66" y="202" fill="#1f2a22">Garlic</text><text x="162" y="202" fill="#8a5006" font-weight="bold" text-anchor="end">Est. $0.68</text>
+</g>
+<rect x="64" y="222" width="100" height="28" rx="8" fill="#31513a"/>
+<text x="114" y="240" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">Shopping list</text>
+</svg>
